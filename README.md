@@ -1,2 +1,3 @@
 # tex-notes
-Class notes writted in LaTeX
+
+[Overleaf](https://www.overleaf.com/)
