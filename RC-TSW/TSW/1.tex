@@ -1,6 +1,6 @@
 \section{Introduzione al World Wide Web}
 
-Il \textbf{World Wide Web} è un immenso insieme di documenti, testuali e non, interconnessi tramite \textit{hyperlink}. Da non confondere con \textbf{Internet}, che è invece una rete di computer, si può dire che il Web è un servizio che gira su Internet. Tutti i documenti che formano il Web sono messi a disposizione da dei server, sono generalmente organizzati in siti e possono essere identificati da degli URL.
+Il \textbf{World Wide Web} è un immenso insieme di documenti, testuali e non, interconnessi tramite \textit{hyperlinks}. Da non confondere con \textbf{Internet}, che è invece una rete di computer, si può dire che il Web è un servizio che gira su Internet. Tutti i documenti che formano il Web sono messi a disposizione da dei server, sono generalmente organizzati in siti e possono essere identificati da degli URL.
 
 \vspace{3mm}
 
@@ -13,11 +13,11 @@ Partiamo dicendo che ogni risorsa sul Web ha un indirizzo unico nel formato URL,
 
 \subsubsection{URI}
 
-Gli URI, \textbf{Uniform Resource Identifier}, sono una generalizzazione degli URL e forniscono un meccanismo semplice ed estendibile per identificare una qualsiasi risorsa, anche non presente su Internet. Con il termine "risorsa", in ogni caso, intendiamo una qualunque entità dotata di identità: un documento, un immagine, un servizio, una collezione di differenti risorse.
+Gli URI, \textbf{Uniform Resource Identifier}, sono una generalizzazione degli URL e forniscono un meccanismo semplice ed estendibile per identificare una qualsiasi risorsa, anche non presente su Internet. Con il termine "\textit{risorsa}", in ogni caso, intendiamo una qualunque entità dotata di identità: un documento, un immagine, un servizio, una collezione di differenti risorse.
 
 \vspace{3mm}
 
-Un URI è un concetto generale: non fa riferimento necessariamente a risorser accessibili tramite HTTP o ad entità disponibili in rete; inoltre, è un mapping concettuale ad un'entità: non si riferisce necessariamente ad una particolare versione dell'entità esistente in un dato momento, e tale mapping può rimanere inalterato anche se cambia il contenuto della risorsa stessa. 
+Un URI è un concetto generale: non fa riferimento necessariamente a risorse accessibili tramite HTTP o ad entità disponibili in rete; inoltre, è un mapping concettuale ad un'entità: non si riferisce necessariamente ad una particolare versione dell'entità esistente in un dato momento, e tale mapping può rimanere inalterato anche se cambia il contenuto della risorsa stessa. 
 
 \vspace{3mm}
 
@@ -49,7 +49,7 @@ Di conseguenza, l'URN permette di identificare una risorsa tramite una denominaz
     
 \subsubsection{URL}
     
-L'\textbf{Uniform Resource Locator} (URL) identifia una risorsa per mezzo del suo meccanismo di accesso primario (es. locazione nella rete) piuttosto che sulla base del suo nome o dei suoi attributi.
+L'\textbf{Uniform Resource Locator} (URL) identifica una risorsa per mezzo del suo meccanismo di accesso primario (es. locazione nella rete) piuttosto che sulla base del suo nome o dei suoi attributi.
 
 Ad esempio, un URL è un indirizzo di casa, un numero di telefono, o l'indirizzo di un sito web.
 
@@ -81,7 +81,7 @@ Questa forma vale per diversi protocolli, come HTTP, HTTPS, FTP, WAP e così via
     \(<fragment>\): una stringa di caratteri che si riferisce ad una risorsa subordinata ad una primaria
 \end{itemize}
 
-Gli URL sono classificati come \textit{opachi} o \textit{gerarchici}. Un URL opca non è soggetta da operazioni di parsing, mentre un URL gerarchica è soggetta ad ulteriori operazioni di parsing (cioè dotata di query, fragments, non essere nella root e così via). 
+Gli URL sono classificati come \textit{opachi} o \textit{gerarchici}. Un URL opaco non è soggetto ad operazioni di parsing, mentre un URL gerarchico è soggetto ad ulteriori operazioni di parsing (cioè dotato di query, fragments, ubicazione non nella root e così via). 
 
 \vspace{3mm}
 
@@ -91,7 +91,7 @@ Sugli URL gerarchici si possono effettaure diverse operazioni, come la \textbf{n
 
 Esempio di risoluzione:
 \begin{itemize}
-    \item URL originaria: : docs/guide/collections/designfaq.html\#28
+    \item URL originaria: docs/guide/collections/designfaq.html\#28
     \item Base URL: http://di.unisa.it/
     \item Risultato: http://di.unisa.it/docs/guide/collections/designfaq.html\#28
 \end{itemize}
@@ -102,15 +102,13 @@ L'\textbf{HTTP} è l'acronomimo di \textit{HyperText Transfer Protocol}. E' il p
 
 \vspace{3mm}
 
-Un client è definito come un programma applicativo che stabilisce una connessione al fine di inviare delle richieste.
-Un server è definito come un programma applicativo che accetta connessioni al fine di ricevere richieste ed inviare specifiche risposte con le risorse richieste.
-Infine, una connessione è definita come un circuito virtuale stabilito a livello di trasporto tra due applicazioni per
-fini di comunicazione.
+Un \textbf{client} è definito come un programma applicativo che stabilisce una connessione al fine di inviare delle richieste.
+Un \textbf{server} è definito come un programma applicativo che accetta connessioni al fine di ricevere richieste ed inviare specifiche risposte con le risorse richieste.
+Infine, una connessione è definita come un circuito virtuale stabilito a livello di trasporto tra due applicazioni per fini di comunicazione.
 
 \vspace{3mm}
 
-\textbf{Client e server si trasmettono messaggi}, intesi come l’unità base di comunicazione HTTP, è definita come una specifica
-sequenza di byte concettualmente atomica.
+\textbf{Client e server si trasmettono messaggi}, intesi come l’unità base di comunicazione HTTP, che è definita come una specifica sequenza di byte concettualmente atomica.
 
 \vspace{3mm}
 
@@ -223,6 +221,10 @@ La prima soluzione presenta chiari svantaggi: non funzionerebbe se l'indirizzo f
 \vspace{3mm}
 
 E' importante assicurare la massima sicurezza dei dati trasmessi (si pensi alle password). Si punta alla confidenzialità, all'integrità, all'autenticità e al non ripudio (confermare mittente e destinatario dei dati) delle informazioni sensibili trasmesse. In genere, la sicurezza dell'autenticazione (e non solo) viene implementata tramite dei canali di trasporto ad hoc, come l'SSL o il TLS, che è alla base dell'HTTPS, un protocollo più sicuro e sostitutivo dell'HTTP, che aggiunge un livello che si occupa della gestione della sicurezza nella comunicazione dei messaggi fra richieste e risposte. E' basato sulla crittografia a chiave pubblica e sui certificati per autenticare il server.
+
+\vspace{3mm}
+
+In particolare, il protocollo SSL assicura la confidenzialità, l'autenticità e l'integrità della comunicazione fra HTTP e TCP. Si accede gli applicativi tramite HTTPS ed è basata sulla crittografia a chiave pubblica. In sintesi, si prende il dato, lo si cripta con una chiave pubblica, e l'unico che può decriptarla è il possessore della chiave privata.
 
 \subsubsection{HTTP Cache}
 

@@ -9,7 +9,7 @@ Un sistema di comunicazione è composto da messaggio, mittente, destinatario, me
 
 \vspace{3mm}
 
-Il messaggio, e cioè l'informazione, può essere rappresentata in varie forme, quali testi, numeri, immagini, audio, video e altro. Un messaggio è in forma discreta se è rappresentato da sequenze di bit. Ad esempio, per il testo, la forma discreta coincide con una codifica ASCII; per le immagini, la forma discreta coincide con l'aggregazione di pixel.
+Il \textbf{messaggio}, e cioè l'\textbf{informazione}, può essere rappresentata in varie forme, quali testi, numeri, immagini, audio, video e altro. Un messaggio è in \textit{forma discreta} se è rappresentato da sequenze di bit. Ad esempio, per il testo, la forma discreta coincide con una codifica ASCII; per le immagini, la forma discreta coincide con l'aggregazione di pixel.
 
 \vspace{3mm}
 
@@ -20,7 +20,7 @@ La comunicazione fra due dispositivi può essere di tre tipi: \textbf{unidirezio
     \textbf{Simplex:} La comunicazione avviene in una sola direzione, come succede al traffico automobilistico in una strada a senso unico. Solo uno dei due dispositivi può spedire dati mentre l’altro dispositivo può solo riceverli.
 
     \item
-    \textbf{Duplex:} Ogni dispositivo può sia trasmettere che ricevere ma non contemporaneamente
+    \textbf{Duplex:} Ogni dispositivo può sia trasmettere che ricevere ma non contemporaneamente.
     
     \item
     \textbf{Full-Duplex:} Entrambi i dispositivi possono spedire e ricevere i dati contemporaneamente.
@@ -28,7 +28,7 @@ La comunicazione fra due dispositivi può essere di tre tipi: \textbf{unidirezio
 
 \subsection{Cos'è una rete}
 
-Una \textbf{rete di calcolatori} è un insieme di dispositivi o nodi indipendenti ed interconnessi tra loro attraverso un canale di comunicazione che possono scambiarsi informazioni e cooperare. I vantaggi giacciono chiaramente nella possibilità di condividere risorse e collaborare, riducendo dunque i costi e distribuendo in modo omogeneo il peso computazionale. Il svantaggio è che tutto ciò richiede una gestione complessa.
+Una \textbf{rete di calcolatori} è un insieme di dispositivi (detti \textit{nodi}) indipendenti ed interconnessi tra loro attraverso un canale di comunicazione, tramite il quale possono scambiarsi informazioni e cooperare. I vantaggi giacciono chiaramente nella possibilità di condividere risorse e collaborare, riducendo dunque i costi e distribuendo in modo omogeneo il peso computazionale. Lo svantaggio è che tutto ciò richiede una gestione difficoltosa e complessa.
 
 \vspace{3mm}
 
@@ -37,18 +37,18 @@ grandi categorie: \textit{connessioni punto-punto} e \textit{connessioni multipu
 
 \begin{itemize}
     \item 
-    Una \textbf{connessione punto-punto} si ottiene dedicando un canale fisico ai due dispositivi che devono comunicar. L’intera capacità del canale è dedicata ai due dispositivi connessi dal
+    Una \textbf{connessione punto-punto} si ottiene dedicando un canale fisico ai due dispositivi che devono comunicare. L’intera capacità del canale è dedicata ai due dispositivi connessi dal
     collegamento. Un esempio pratico è un cavo che connette due computer.
     
     \item
     Una \textbf{connessione multipunto} è un collegamento condiviso da più di due dispositivi. La capacità di un collegamento multipunto va condivisa fra i dispositivi che lo usano. La condivisione può avvenire temporalmente se l’accesso al mezzo trasmissivo è esclusivo, motivo per cui l'utilizzo del collegamento è a turnazione. Se il canale trasmissivo ammette un utilizzo simultaneo da parte di più dispositivi allora si parla di condivisione dello spazio.
 \end{itemize}
 
-La topologia descrive come i nodi sono fisicamente connessi da un mezzo trasmissivo, e possono essere di quattro tipi: \textit{mesh}, \textit{stella}, \textit{bus} e \textit{anello}. E' anche possibile elaborare soluzioni ibride.
+La \textbf{topologia} descrive come i nodi sono fisicamente connessi da un mezzo trasmissivo, e possono essere di quattro tipi: \textit{mesh}, \textit{stella}, \textit{bus} e \textit{anello}. E' anche possibile elaborare soluzioni ibride.
 
 \begin{itemize}
     \item 
-    In una topologia \textbf{mesh} (a maglia di rete), ogni nodo ha un collegamento punto-punto con ogni altro nodo della rete. 
+    In una topologia \textbf{mesh} (\textit{a maglia di rete}), ogni nodo ha un collegamento punto-punto con ogni altro nodo della rete. 
     
     Utilizzando dei collegamenti simplex occorrono \(n*(n-1)\) collegamenti per una mesh; invece, utilizzando dei collegamenti duplex occorrerebbero \(n*(n-1)/2\) collegamenti.
     
@@ -56,41 +56,57 @@ La topologia descrive come i nodi sono fisicamente connessi da un mezzo trasmiss
     
     Il vantaggio è che ogni coppia di nodi può comunicare indipendentemente da ogni altra coppia, assicurando affidabilità e sicurezza. Lo svantaggio è che serviranno molti cavi per collegare i nodi.
     
+    \begin{center}
+        \includegraphics[scale=0.25]{images/MeshNetwork.png}
+    \end{center}
+    
     \item
-    In una topologia a \textbf{stella}, ogni nodo èconnesso con un collegamento punto-punto ad un dispositivo centrale chiamato \textbf{hub}. Tutto il traffico passa attraverso l'hub.
+    In una topologia a \textbf{stella}, ogni nodo è connesso con un collegamento punto-punto ad un dispositivo centrale chiamato \textbf{hub}. Tutto il traffico passa attraverso l'hub.
     
     E' una soluzione economica: se un nodo si rompe, non si compromette l'intera rete. Tuttavia, tutta la rete dipesa dall'hub, e se esso si rompe, l'intera rete diventa inutilizzabile.
     
+    \begin{center}
+        \includegraphics[scale=0.090]{images/StarNetwork.png}
+    \end{center}
+    
     \item
-    In una topologia a \textbf{bus}, la rete utilizza un collegamentoi multipunto per connettere tutti i nodi. Ogni nodo è connesso al bus tramite un connettore fisico. Quando il segnale attraversa il bus, il connettore riesce a leggerlo.
+    In una topologia a \textbf{bus}, la rete utilizza un collegamento multipunto per connettere tutti i nodi. Ogni nodo è connesso al bus tramite un connettore fisico. Quando il segnale attraversa il bus, il connettore riesce a leggerlo.
     
     Un esempio di topologia con bus è l'Ethernet.
     
     Se il connettore è troppo lungo, il segnale perde d'intensità, limitando notevolmente il numero di connettori e quindi di nodi che si possono collegare al bus. Il vantaggio di questa soluzione è la facilità di installazione di un nuovo nodo. In ogni caso, la gestione dei problemi relativi al bus in sé è difficoltosa e un guasto al connettore potrebbe blocare tutte le connessioni.
     
+    \begin{center}
+        \includegraphics[scale=0.090]{images/BusNetwork.png}
+    \end{center}
+    
     \item
-    In una topologia ad \textbf{anello}, ogni nodo ha un collegameno punto-punto con solo altri du nodi, cioè il nodo precedente e quello successivo. I dati viaggiano in una sola direzione, e ogni nodo ha un ripetitore che rigenera il segnale.
+    In una topologia ad \textbf{anello}, ogni nodo ha un collegameno punto-punto con solo altri due nodi, cioè il nodo precedente e quello successivo. I dati viaggiano in una sola direzione, e ogni nodo ha un ripetitore che rigenera il segnale.
     
     Il vantaggio è che aggiungere un nodo o rimuoverlo richiede il cambiamento dei suoi due vicini e nient'altro; inoltre, isolare un guasto è molto semplice.
     
-    Lo svantaggio è relativo alla natura unidirezionale del traffico. Se un ripettore si rompe, l'intera rete diventa iinutilizzabile.
+    Lo svantaggio è relativo alla natura unidirezionale del traffico. Se un ripetitore si rompe, l'intera rete diventa inutilizzabile.
+    
+    \begin{center}
+        \includegraphics[scale=0.25]{images/RingNetwork.png}
+    \end{center}
 \end{itemize}
 
 Una rete è categorizzabile anche in base alla sua dimensione (LAN, MAN, WAN, Interrete). Esistono molte "\textit{internet}", ma la più grande è "\textit{Internet}".
 
-\subsection{Internet}
+\subsection{Internet e Internet Service Providers}
 
 \textbf{Internet} è una rete di reti che usa il protocollo TCP/IP e il \textit{Packet Switching}. La sua origine può essere datata al 1945 e attribuita al progetto \textbf{Memex} di Bush, che si prefiggeva l'obiettivo di "\textit{mettere in relazione informazioni in maniera simile al cervello umano}", poi meglio concretizzato nella rete \textbf{ARPANET} degli Stati Uniti, che connetteva una ventina di computer.
 
 \vspace{3mm}
 
-I terminali accedono ad Internet attraverso gli \textbf{Internet Service Provider} (ISP), aziende istituzionali, aziendali o universitarie che forniscono accesso alla rete tramite sistemi wireless, DSL, dial-up, e così via. Gli utenti connessi con ISP diversi possono comunicare perchè gli ISP a basso livello sono interconnessi ad ISP di livello più alto. Internet, infatti, funziona fondamentalmente tramite una gerarchia di ISP.
+I terminali accedono ad Internet attraverso gli \textbf{Internet Service Provider} (ISP), aziende istituzionali, aziendali o universitarie che forniscono accesso alla rete tramite sistemi wireless, DSL, dial-up, e così via. Gli utenti connessi con ISP diversi possono comunicare tra di loro perchè gli ISP a basso livello sono interconnessi ad ISP di livello più alto. Internet, infatti, funziona fondamentalmente tramite una gerarchia di ISP.
 
 \vspace{3mm}
 
-Si hanno ISP di livello 1 o "reti dorsali di Internet" (AT\&T, Sprint, Telecom), di livello 2 o "reti nazionali", e di livello 3 o "reti locali". Ciò significa che un pacchetto passa attraverso più reti per arrivare alla destinazione.
+Si hanno ISP di livello 1 o "\textit{reti dorsali di Internet}" (AT\&T, Sprint, Telecom), di livello 2 o "\textit{reti nazionali}", e di livello 3 o "\textit{reti locali}". Ciò significa che un pacchetto passa attraverso più reti per arrivare alla destinazione.
 
-\subsubsection{Introduzione ai protocolli di rete}
+\subsubsection{Accenni ai protocolli di rete}
 
 \vspace{3mm}
 
