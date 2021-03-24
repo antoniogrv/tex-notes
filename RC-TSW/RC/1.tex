@@ -71,6 +71,8 @@
             \item
             In una topologia a \textbf{bus}, la rete utilizza un collegamento multipunto per connettere tutti i nodi. Ogni nodo è connesso al bus tramite un connettore fisico. Quando il segnale attraversa il bus, il connettore riesce a leggerlo.
             
+            Il connettore è detto \textit{dorsale}.
+            
             Un esempio di topologia con bus è l'Ethernet.
             
             Se il connettore è troppo lungo, il segnale perde d'intensità, limitando notevolmente il numero di connettori e quindi di nodi che si possono collegare al bus. Il vantaggio di questa soluzione è la facilità di installazione di un nuovo nodo. In ogni caso, la gestione dei problemi relativi al bus in sé è difficoltosa e un guasto al connettore potrebbe blocare tutte le connessioni.
@@ -84,7 +86,7 @@
             
             Il vantaggio è che aggiungere un nodo o rimuoverlo richiede il cambiamento dei suoi due vicini e nient'altro; inoltre, isolare un guasto è molto semplice.
             
-            Lo svantaggio è relativo alla natura unidirezionale del traffico. Se un ripetitore si rompe, l'intera rete diventa inutilizzabile.
+            Lo svantaggio è relativo alla natura unidirezionale del traffico. Se un ripetitore si rompe, l'intera rete diventa inutilizzabile. La soluzione al problema è l'aggiunta di un ulteriore anello, in modo tale da avere una comunicazione bidirezionale.
             
             \begin{center}
                 \includegraphics[scale=0.25]{images/RingNetwork.png}

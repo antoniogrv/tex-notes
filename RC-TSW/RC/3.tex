@@ -1,38 +1,171 @@
-\section{Suite TCP/IP}
-    L'ISO-OSI è un modello di riferimento, nel senso che si suppone che i produttori di hardware e software seguino gli standard proposti per sviluppare i propri servizi. La \textbf{suite TCP/IP} è stata sviluppata quando il modello OSI non era ancora diventato uno standard, motivo per cui gli sorgono della disambiguità fra i due. Il TCP/IP, in effetti, segue l'ISO-OSI, e per ogni strato utilizza un protocollo diverso.
+\section{Rappresentazione dei dati}
 
-    \begin{center}
-        \includegraphics{images/TCP.png}
-    \end{center}
-
-    La suite TCP/IP permette il funzionamento di Internet. Si ispira all'ISO-OSI e ha una stratificazione a livelli. Ha 5 strati (4 se si accorpano lo strato fisico e quello di collegamento). Il TCP/IP non specifica, né per lo strato fisico, né per lo strato di collegamento, alcun protocollo. Si può usare qualsiasi protocollo previsto dall'hardware di rete. 
-
-\subsection{Overview}
-    Il protocollo che adempie alle funzionalità dello strato di rete è l'\textbf{Internet Protocol} (IP), che usa l'indirizzamento logico per la consegna di pacchetti da un nodo all'altro (datagram). Lo strato di rete non permette una consegna affidabile dei dati perché i datagram possono seguire strade diverse e quindi arrivare alla destinazione in ordine diverso da quello di spedizione, o addiritura duplicarsi o venire persi. 
-    L'IP "\textit{fa del suo meglio}", senza però offrire garanzia alcuna. Ulteriori protocolli utilizzati nello strato di rete sono \textit{ARP} e \textit{RARP} (risoluzone indirizzi), \textit{ICMP} e \textit{IGMP}.
-
-    \vspace{3mm}
-
-    Lo stato di trasporto utilizza i protocolli \textit{UDP} (senza garanzie di consegna, implementata per necessità di celerità), \textit{TCP} (trasmissione affidabile) e \textit{SCTP} (per dati multimediali). L'UDP viene adoperato, ad esempio, per gli streaming su Teams: perdere un pacchetto in una conferenza non è chissà che problema, ma perdere un pacchetto durante una transazione bancaria lo è eccome. Per la transazione bancaria verrebbe utilizzato il TCP.
-
-    \vspace{3mm}
-
-    Lo strato applicativo, che include gli strati di presentazione e di sessione, si rifa in toto all'ISO-OSI. I "protocolli" in questo caso coincidono con i "programmi" utilizzati (posta elettronica, Web, etc).
-
-    \vspace{3mm}
-
-    Nella suite TCP/IP vengono impiegati quattro tipi di indirizzamento:
-
-    \begin{itemize}
+    \subsection{Segnali semplici e composti}
+    
+        La funzione principale dello \textit{strato fisico} è trasportare i dati in forma di \textbf{segnali elettromagnetici} su un mezzo trasmissivo. Questo significa che, per essere trasmessi, i dati devono essere prima trasformati in segnali elettromagnetici.
+        
+        \vspace{3mm}
+        
+       \textbf{ Esistono due tipi di dati: analogici e digitali.} I \textbf{dati analogici} sono informazioni (valori) rappresentate in forma continua (e cioè il cui dominio è un insieme infinito di possibili valori); invece, i \textbf{dati digitali} sono informazioni (valori) rappresentate in forma discreta (e cioè il cui dominio è un insieme finito di possibili valori, rappresentati con sequenze di 0 e 1).
+        
+        \vspace{3mm}
+        
+        \textbf{Esistono due tipi di segnali: analogici e digitali.} I \textbf{segnali analogici} possono assumere un infinito numero di valori in un dato intervallo; invece, i \textbf{segnali digitali} possono assumere solo un numero finito di valori in un dato intervallo.
+        
+        \vspace{3mm}
+        
+        Sia i segnali analogici che digitali possono assumere due forme: \textbf{periodica} (varia regolarmente nel tempo) e \textbf{aperiodica} (varia senza regolarità nel tempo).
+        
+        \vspace{3mm}
+        
+        In particolare, se un segnale digitale ha \(L\) livelli, ogni livello può facilmente rappresentare \(log_2 L\) bit. La lunghezza di tali bit è l'analogo della lunghezza d'onda per i segnali analogici. Può essere pensata come la distanza (o lo spazio) che la rappresentazione di un bit occupa sul mezzo trasmissivo. E' funzione di velocità di propagazione e rappresentazione utilizzata. La lunghezza di 1 bit equivale a \((\text{velocità di propagazione})*(\text{durata di 1 bit})\).
+        
+        \vspace{3mm}
+        
+        Per le reti di comunicazione, normalmente vengono usati segnali analogici periodici e segnali digitali non periodici. I primi richiedono minore larghezza di banda e possono essere semplici o composti. I secondi possono rappresentare facilmente i dati.
+    
+    \subsection{Descrizione delle onde sinusoidali}
+    
+        \textbf{Un segnale analogico è detto semplice se non può essere decomposto in segnali più semplici}, e viene rappresentato graficcamente con una curva oscillante (come la funzione \(sen\)). Tale curva dipesa dall'\textit{ampiezza massima} (o di picco; è il valore assoluto del segnale nella sua intensità massima - per segnali elettrici si misura in \textit{volt}), dalla \textit{frequenza} e dalla \textit{fase}.
+        
+        \vspace{3mm}
+        
+        Le onde semplici hanno molte applicazioni: ad esempio, sono adatte per il trasporto di energia elettrica, ma sono inadatte per il trasporto di segnali che rappresentano suoni, dati e quindi per le reti di comunicazione in generale.
+        
+        \vspace{3mm}
+        
+        Un segnale semplice è descritto tramite:
+        
+        \begin{itemize}
+        
         \item 
-            \textbf{Indirizzi fisici} (strato fisico e di collegamento), rappresentato dal MAC Address. E' cablato all'interno della scheda di rete, è una sequenza di 6 byte trascritti nell'interfaccia di rete.
+            Il \textbf{periodo} è il tempo necessario affinché un segnale completi un ciclo, espresso in \textit{secondi}.
         
         \item
-            \textbf{Indirizzi logici} (strato di rete), rappresentato dall'IP Address. E' una sequenza di 4 byte in notazione decimale puntata. Ogni computer connesso ad Internet ha un indirizzo IP.
+            La \textbf{frequenza} è il numero di periodi in 1 secondo, espresso in \textit{hertz}. Può essere interpretata come la velocità con cui il segnale cambia nel tempo, ed è direttamente legata alla velocità di trasmissione.
         
         \item
-            \textbf{Indirizzi di porta }(strato di trasporto), rappresentato dai numeri di porta. Gli indirizzi IP e MAC sono necessari per far arrivare i dati al destinatario; tuttavia, su un singolo computer possono essere in esecuzione contemporaneamente più programmi: l'indirizzo di porta ci permette di determinare a quale programma inviare i dati. Le porte sono a 2 byte.
+            Si osservi che il periodo è l'inverso della frequenza, e viceversa.
+        
+            \begin{center}
+                \(f=\frac{1}{T}\)
+                
+                \(T=\frac{1}{f}\)
+            \end{center}
         
         \item
-            \textbf{Indirizzi specifici} (strati applicativi), rappresentati da vari indirizzi, come l'indirizzo email
-    \end{itemize}
+            La \textbf{fase} descrive la posizione dell'onda sinusoidale rispetto al tempo 0, espressa in \textit{gradi} o \textit{radianti}. Se si pensa all'onda come un qualcosa che può essere spostato avanti o indietro lungo l'asse del tempo, la fase descrive l'ampiezza di tale spostamento.
+        
+        \item
+            La \textbf{lunghezza dell'onda} mette in relazione il periodo \(T\) (o la frequenza \(f\)) con la velocità di propagazione \(c\) del segnale del mezzo. La lunghezza d'onda è funzione del mezzo di trasmissione (oltre che del segnale) e rappresenta la distanza (o meglio lo spazio) che un ciclo del segnale occupa sul mezzo trasmissivo, espressa in \textit{micron}.
+        
+            \begin{center}
+                \(\lambda=c*T=\frac{c}{f}\)
+            \end{center}
+        \end{itemize}
+    
+        Parliamo adesso dei segnali composti. Le onde composte sono la somma di onde sinusoidali semplici. L'\textit{analisi di Fourier} mostra che un qualsiasi segnale composto è la somma di onde semplici con diverse frequenza, ampiezze e fasi.
+        
+        \vspace{3mm}
+        
+        Un segnale composto è descritto tramite:
+        
+        \begin{itemize}
+            \item
+                Lo \textbf{spettro} è l'insieme delle frequenze di un segnale composto.
+            
+            \item
+                La \textbf{larghezza di banda} è la differenza fra la frequenza più alta e la più bassa nello spettro.
+        \end{itemize}
+    
+    \subsection{Deterioramento del segnale}
+    
+        I segnali viaggiano lungo il mezzo trasmissivo, il quale causa un deterioramento del segnale: questo implica che il segnale ricevuto non è esattamente quello inviato. Le cause sono, in genere, l'attenuazione, la distorsione o il rumore del segnale.
+        
+        \vspace{3mm}
+        
+        L'\textbf{attenuazione} è la perdita di energia subita quando il segnale, viaggiando lungo il mezzo trasmissivo, deve superare la resistenza del suddetto. Questo è anche il motivo per cui il filo elettrico si riscalda quando viene attraversato dal segnale: parte dell'energia elettrica, infatti, viene convertita in calore. La perdita di energia è espressa in decibel, che misurano la potenza relativa di due segnali (o dello stesso segnale) in due punti differenti. Per ripristinare il valore corretto di decibel viene generalmente posto un amplificatore nei pressi del nodo destinatario.
+        
+        \vspace{3mm}
+        
+        La \textbf{distorsione} è il cambiamento della forza del segnale, molto tipica dei segnali composti costituito da varie frequenze. Ogni componente (frequenza) del segnale ha una propria velocità di propagazione lungo il mezzo trasmissivo, il che causa un ritardo per l'arrivo della destinazione.
+        
+        \vspace{3mm}
+        
+        Il \textbf{rumore} è dovuto ad interferenze esterne. Può essere termico (causato dal movimento casuale degli elettroni nel mezzo trasmissivo), indotto (causato da sorgenti come motori o altri dispositivi esterni), ad impulsi (causato da fonti esterne come fulmini, che causano un repentino cambio del segnale) o ad interferenze (causato dall'eccessiva vicinanza fra due cavi che trasmettono segnali).
+    
+    \subsection{Velocità di trasferimento}
+    
+        Per trovare il limite teorico alla velocità in bit occorre conoscere il rapporto fra la potenza del segnale e la potenza del rumore del canale.
+    
+        \begin{center}
+            \(SNR = \frac{potenza\ \ segnale}{potenza\ \ rumore}\)
+            
+            \vspace{3mm}
+            
+            \(SNR_{db} = 10 log_{10} SNR\)
+        \end{center}
+        
+        La velocità di trasferimento dei bit dipesa dalla larghezza di banda, dal numero di livelli del segnale e dalla qualità del canale (che induce o meno al rumore). I due risultati teorici per il calcolo della velocità massima su un canale di comunicazione sono forniti dal \textit{Teorema di Nyquist} e dal \textit{Teorema di Shannon}.
+        
+        I teoremi di Shannon e Nyquist forniscono due risultati in letteratura estremamente validi per ciò che concerne la velocità idealistica ed effettiva della trasmissione di dati.
+        
+        \subsubsection{Teorema di Nyquist}
+        
+            \(\text{velocità in bit per secondo}=2*(\text{larghezza di banda})*log_2 L\)
+            
+            \vspace{3mm}
+            
+            Questo risultato parte dal presupposto che un risultato non sia condizionato dal rumore.
+            
+            \(L\) è il numero di livelli del segnale che possono essere utilizzati per rappresentare i dati. Aumentando \(L\) si aumenta la velocità. Fornisce la velocità teorica massima alla quale possiamo spedire i dati. Chiaramente, non si può aumentare \(L\) a piacere, poiché si ridurrebbe l'affidabilità della trasmissione e indurrebbe a più errori.
+        
+        \subsubsection{Teorema di Shannon}
+        
+            \(\text{capacità}=(\text{larghezza di banda})*log_2 (1+SNR)\)
+            
+            \vspace{3mm}
+            
+            \textbf{Nella realtà non esistono canali senza rumore}, ma questo teorema fornisce comunque un valido risultato teorico per la capacità (cioè la velocità massima) di un canale in \textit{bps}. E' in funzione del canale e non dei livelli dei canali.
+            
+    \subsection{Prestazioni della rete}    
+        
+        Per misurare l'efficienza di una rete, in genere, si valutano numerosi parametri.
+        
+        \subsubsection{Larghezza di banda}
+        
+            Espressa in \textit{hertz}, è la larghezza di banda delle frequenze utilizzate per la trasmissione. E' dunque l'intervallo di frequenze utilizzate dal segnale, o l'insieme di frequenze che possono essere spedite lungo il canale.
+            
+            Espressa in \textit{bps}, misura la velocità massima alla quale possiamo spedire bit sul canale.
+            
+        \subsubsection{Throughput}
+        
+            \textbf{Misura quando velocemente possiamo spedire i dati su una rete.} A differenza della larghezza di banda, è una \textbf{misura effettiva}.
+            
+        \subsubsection{Latenza (ritardo)}
+        
+            \textbf{Misura quanto tempo occorre a trasferire un intero messaggio.} In effetti, è il tempo misurato dal primo bit spedito  all'ultimo bit arrivato, e consiste in tempo di trasmissione, di propagazione, di attesa e di inoltro.
+            
+            \vspace{3mm}
+            
+            Il tempo di trasmissione misura il tempo per immettere i dati sul mezzo.
+            
+            \begin{center}
+                \(T_T = \frac{\text{dimensione dei dati (in bit)}}{\text{larghezza di banda}}\)
+            \end{center}
+            
+            Il tempo di propagazione misura il tempo necessario al segnale per propagarsi sul mezzo trasmissivo.
+            
+            \begin{center}
+                \(T_P = \frac{\text{distanza}}{\text{velocita' di propagazione del segnale}}\)
+            \end{center}
+            
+            I tempi di attesa e di inoltro riguardano, rispettivamente, l'attesa nei nodi intermedi e il tempo necessario al nodo intermedio per smistare il messaggio.
+            
+        \subsubsection{Prodotto banda-ritardo}
+        
+            E' il prodotto \(\text{(larghezza di banda)}*\text{(latenza)}\). Definisce il numero di bit che servono per riempire il canale.
+            
+        \subsubsection{Jitter}
+        
+            Misura la variabilità del ritardo con cui vari messaggi, cioè i pacchetti, vengono consegnati alla destinazione. E' chiaramente necessario che i pacchetti vengano consegnati con lo stesso ritardo.

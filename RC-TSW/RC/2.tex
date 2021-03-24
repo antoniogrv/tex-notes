@@ -1,4 +1,4 @@
-\section{Modello ISO-OSI}
+\section{Modello ISO-OSI e Suite TCP/IP}
     Internet è infinitamente complesso. Per semplificare l'invio delle informazioni e, in generale, per assicurare la corretta gestione della interrete, i progettisti hanno pensato di separare le componenti hardware e software il più possibile.
 
     \vspace{3mm}
@@ -45,7 +45,7 @@
         
         In particolare, gli strati 1, 2 e 3 (\textit{fisico, collegamento, rete}) sono detti \textbf{Media Layers} e sono dedicati al supporto di rete. Le loro funzionalità hanno a che fare con problematiche del mezzo fisico (specifiche elettriche, connessioni fisiche, indirizzi di rete, sincronizzazione, controllo degli errori).
         
-        Invece, gli strati 5, 6 e 7 (\textit{sessione, presentazione, applicazioni}) sono detti \textbf{Host Layers} e sonodedicati al supporto all'utente e permettono l'interoperabilità fra sistemi che usano software diversi fra loro. 
+        Invece, gli strati 5, 6 e 7 (\textit{sessione, presentazione, applicazioni}) sono detti \textbf{Host Layers} e sono dedicati al supporto all'utente e permettono l'interoperabilità fra sistemi che usano software diversi fra loro. 
         
         Lo strato 4 (\textit{trasporto}) collega i due gruppi di strati appena descritti, e solitamente viene affibbiato al gruppo di Host Layers.
         
@@ -107,7 +107,7 @@
         
         \vspace{3mm}
         
-        Il \textbf{Data Link Layer}, oltre ad aggiungere il proprio header e accorpare i dati precedenti, piazzerà in coda anche un trailer T2, dedicato al controllo degli errori. 
+        Il \textbf{Data Link Layer}, oltre ad aggiungere il proprio header e accorpare i dati precedenti, piazzerà in coda anche un trailer \textit{T2}, dedicato al controllo degli errori. 
         
         \vspace{3mm}
         
@@ -136,7 +136,7 @@
         
         \vspace{3mm}
         
-        In particolare, lo strato fisico definisce la velocità con cui i segnali vanno spediti; in che modo i bit devono essere sincronizzati per essere letti correttamente dal destinatario; come vanno rappresentati i bit e codificati in segnali; come definire il tipo di mezzo trasmissivo impiegato; dio che tipo è la comunicazione (simplex, half-duplex, duplex); di che tipo è la topologia della rete; com'è configurato il collegamento fra i nodi (punto-punto, multipunto).
+        In particolare, lo strato fisico definisce la velocità con cui i segnali vanno spediti; in che modo i bit devono essere sincronizzati per essere letti correttamente dal destinatario; come vanno rappresentati i bit e codificati in segnali; come definire il tipo di mezzo trasmissivo impiegato; di che tipo è la comunicazione (simplex, half-duplex, duplex); di che tipo è la topologia della rete; com'è configurato il collegamento fra i nodi (punto-punto, multipunto).
         
         \subsubsection{Data Link Layer}
         
@@ -154,7 +154,7 @@
             
             La \textit{consegna dei frame}, detta \textbf{hop}, avviene fra due nodi successivi. Tale consegna può essere diretta o indiretta. Nel caso di una consegna indiretta, e cioè a più passaggi, i frame conterranno gli stessi dati, ma headers e trailers varieranno per ogni spedizione. 
             
-            La consegna indiretta avviene quando la comunicazione dev'essere stabilita fra nodi su reti diverse. Si noti, infine, che la consegna indirezza è concettualmente una sequenza di consegne dirette.
+            La consegna indiretta avviene quando la comunicazione dev'essere stabilita fra nodi su reti diverse. Si noti, infine, che la consegna indiretta è concettualmente una sequenza di consegne dirette.
         
         \subsubsection{Network Layer}
         
@@ -184,7 +184,7 @@
             
             \vspace{3mm}
             
-            In effetti, lo stato di trasporto si occupa proprio di discenere il programma (inteso come processo) al quale devono essere effettivamente inviati i pacchetti dati. L'informazione che mi permette di capire a quale proceso inviare i dati è la porta di rete (es. localhost:\textit{8080}), motivo per cui è necessario aggiungere un ulteriore tipo di indirizzamento, contenuto nell'intestazione pervenuta dallo stato di sessione.
+            In effetti, lo stato di trasporto si occupa proprio di determinare il programma (inteso come processo) al quale devono essere effettivamente inviati i pacchetti dati. L'informazione che mi permette di capire a quale proceso inviare i dati è la porta di rete (es. localhost:\textit{8080}), motivo per cui è necessario aggiungere un ulteriore tipo di indirizzamento, contenuto nell'intestazione pervenuta dallo stato di sessione.
             
             \vspace{3mm}
             
@@ -192,7 +192,7 @@
             
             \vspace{3mm}
             
-            Inoltre, lo stato di trasporto si occupa della segmentazione del riassemblaggio dei pacchetti, e del controllo della connessione. Lo stato di trasporto, infatti, offre un servizio che può essere con o senza connessione. In una \textbf{comunicazione senza connessione}, i dati vengono spediti in pacchetti indipendenti l'uno dall'altro; invece, in una \textbf{comunicazione con connessione}, lo strato di trasporto del mittente crea una connessione con lo stato di trasporto del destinatario prima di trasferire pacchetti contenenti i dati veri e propri.
+            Inoltre, lo stato di trasporto si occupa della segmentazione del riassemblaggio dei pacchetti, e del controllo della connessione. Lo stato di trasporto, infatti, offre un servizio che può essere con o senza connessione. In una \textbf{comunicazione senza connessione}, i dati vengono spediti in pacchetti indipendenti l'uno dall'altro; invece, in una \textbf{comunicazione con connessione}, lo strato di trasporto del mittente crea una connessione con lo stato di trasporto del destinatario prima di trasferire pacchetti contenenti i dati veri e propri. Inoltre, fra i due vi è la differenza che, rispettivamente, i pacchetti eseguono lo stesso percorso, ed eseguono percorsi differenti.
             
             Infine, lo stato di trasporto controlla, fra i processi terminali (mittente e destinatario), la velocità di trasmissione dei dati, nonché eventuali errori nell'intero processo.
         
@@ -207,3 +207,43 @@
         \subsubsection{Application Layer}
         
             Lo \textit{strato di applicazione} fornisce i servizi di rete all'utente finale. Servizi di posta, World Wide Web, accesso a file remoti, gestione condivisa di database e tanto altro.
+            
+    \subsection{Suite TCP/IP}
+        L'ISO-OSI è un modello di riferimento, nel senso che si suppone che i produttori di hardware e software seguino gli standard proposti per sviluppare i propri servizi. La \textbf{suite TCP/IP} è stata sviluppata quando il modello OSI non era ancora diventato uno standard, motivo per cui sorgono delle disambiguità fra i due. Il TCP/IP, in effetti, segue l'ISO-OSI, e per ogni strato utilizza un protocollo diverso.
+    
+        \begin{center}
+            \includegraphics{images/TCP.png}
+        \end{center}
+    
+        La suite TCP/IP permette il funzionamento di Internet. Si ispira all'ISO-OSI e ha una stratificazione a livelli. Ha 5 strati (4 se si accorpano lo strato fisico e quello di collegamento). Il TCP/IP non specifica, né per lo strato fisico, né per lo strato di collegamento, alcun protocollo. Si può usare qualsiasi protocollo previsto dall'hardware di rete. 
+    
+    \subsubsection{Funzionamento e tipi di indirizzamento}
+        Il protocollo che adempie alle funzionalità dello strato di rete è l'\textbf{Internet Protocol} (IP), che usa l'indirizzamento logico per la consegna di pacchetti da un nodo all'altro (datagram). Lo strato di rete non permette una consegna affidabile dei dati perché i datagram possono seguire strade diverse e quindi arrivare alla destinazione in ordine diverso da quello di spedizione, o addiritura duplicarsi o venire persi. 
+        L'IP "\textit{fa del suo meglio}", senza però offrire garanzia alcuna. Ulteriori protocolli utilizzati nello strato di rete sono \textit{ARP} e \textit{RARP} (risoluzone indirizzi), \textit{ICMP} e \textit{IGMP}.
+    
+        \vspace{3mm}
+    
+        Lo stato di trasporto utilizza i protocolli \textit{UDP} (senza garanzie di consegna, implementata per necessità di celerità), \textit{TCP} (trasmissione affidabile) e \textit{SCTP} (per dati multimediali). L'UDP viene adoperato, ad esempio, per gli streaming su Teams: perdere un pacchetto in una conferenza non è chissà che problema, ma perdere un pacchetto durante una transazione bancaria lo è eccome. Per la transazione bancaria verrebbe utilizzato il TCP.
+    
+        \vspace{3mm}
+    
+        Lo strato applicativo, che include gli strati di presentazione e di sessione, si rifa in toto all'ISO-OSI. I "protocolli" in questo caso coincidono con i "programmi" utilizzati (posta elettronica, Web, etc).
+    
+        \vspace{3mm}
+    
+        Nella suite TCP/IP vengono impiegati quattro tipi di indirizzamento:
+    
+        \begin{itemize}
+            \item 
+                \textbf{Indirizzi fisici} (strato fisico e di collegamento), rappresentato dal MAC Address. E' cablato all'interno della scheda di rete, è una sequenza di 6 byte trascritti nell'interfaccia di rete.
+            
+            \item
+                \textbf{Indirizzi logici} (strato di rete), rappresentato dall'IP Address. E' una sequenza di 4 byte in notazione decimale puntata. Ogni computer connesso ad Internet ha un indirizzo IP.
+            
+            \item
+                \textbf{Indirizzi di porta }(strato di trasporto), rappresentato dai numeri di porta. Gli indirizzi IP e MAC sono necessari per far arrivare i dati al destinatario; tuttavia, su un singolo computer possono essere in esecuzione contemporaneamente più programmi: l'indirizzo di porta ci permette di determinare a quale programma inviare i dati. Le porte sono a 2 byte.
+            
+            \item
+                \textbf{Indirizzi specifici} (strati applicativi), rappresentati da vari indirizzi, come l'indirizzo email
+        \end{itemize}
+

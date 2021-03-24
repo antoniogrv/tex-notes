@@ -39,7 +39,7 @@
         \subsubsection{URN}
         
             L'\textbf{Uniform Resource Name} (URN) identifica una risorsa per mezzo di un nome che dev'essere globalmente unico, e deve restare valido anche se la risorsa cessa di esistere o essere disponibile. 
-            Un URN identifica una risorsa mediante un nome in un particolare dominio di nomi detto namespace. Dev'essere unico e duraturo, e deve consentire di interfacciarsi con la rsorsa a prescindere dalla sua ubicazione e alle modalità di accesso previste. 
+            Un URN identifica una risorsa mediante un nome in un particolare dominio di nomi detto namespace. Dev'essere unico e duraturo, e deve consentire di interfacciarsi con la risorsa a prescindere dalla sua ubicazione e alle modalità di accesso previste. 
             
             \vspace{3mm}
             
@@ -97,7 +97,7 @@
     
     \subsection{HTTP}
     
-        L'\textbf{HTTP} è l'acronomimo di \textit{HyperText Transfer Protocol}. E' il protocollo di livello applicativo nel TCP/IP utilizzato per trasferire le risorser Web da server a client. Gestisce sia le richieste (URL) inviate al server che le risposte inviate al client (pagine web). E' un protocollo \textbf{stateless} e \textbf{one-shot}, e cioè né client né server mantengono informazioni relative ai messaggi precedentemente scambiati.
+        L'\textbf{HTTP} è l'acronomimo di \textit{HyperText Transfer Protocol}. E' il protocollo di livello applicativo nel TCP/IP utilizzato per trasferire le risorse Web da server a client. Gestisce sia le richieste (URL) inviate al server che le risposte inviate al client (pagine web). E' un protocollo \textbf{stateless} e \textbf{one-shot}, e cioè né client né server mantengono informazioni relative ai messaggi precedentemente scambiati.
         
         \vspace{3mm}
         
@@ -123,7 +123,7 @@
         
         \vspace{3mm}
         
-        La grande differenza fra HTTP 1.0 e 1.1 è la capacità di una singola connessione di essere utilizzata per più richieste. A differenza della prima versione, le connessioni \textbf{HTTP 1.1} sono persistenti. Il server lascia aperta la connessione TCP dopo aver spedito la risposta e può quindi ricevere le richieste sucessive sulla stessa coinnessione. Il server chiude, poi, la connessione quando viene specificato nell'header del messaggio. 
+        La grande differenza fra HTTP 1.0 e 1.1 è la capacità di una singola connessione di essere utilizzata per più richieste. A differenza della prima versione, le connessioni \textbf{HTTP 1.1} sono persistenti. Il server lascia aperta la connessione TCP dopo aver spedito la risposta e può quindi ricevere le richieste sucessive sulla stessa connessione. Il server chiude, poi, la connessione quando viene specificato nell'header del messaggio. 
         
         \vspace{3mm}
         
@@ -139,8 +139,8 @@
             
             \vspace{3mm}
             
-            Il metodo GET serve per richiedere una risorsa ad un server. ! È il metodo più frequente: è quello che viene attivato
-            facendo click su un link ipertestuale di un documento HTML, o specificando un URL nell’apposito campo di un browser. È previsto il passaggio di parametri (la parte \(<query>\) dell’URL), a patto che non ecceda la lunghezza massima dell'URL.
+            Il metodo GET serve per richiedere una risorsa ad un server. È il metodo più frequente: è quello che viene attivato
+            facendo click su un link ipertestuale di un documento HTML, o specificando un URL nell’apposito campo di un browser. È previsto il passaggio di parametri (la parte \(<query>\) dell’URL), a patto che non ecceda la lunghezza massima dell'URL. La lunghezza massima di una richiesta GET è di 2000 caratteri.
             
             \vspace{3mm}
             
@@ -213,11 +213,11 @@
             
             \vspace{3mm}
             
-            La prima soluzione presenta chiari svantaggi: non funzionerebbe se l'indirizzo fosse pubblico, assegnato dinamicamente o fasullo. La seconda soluzione è obsoleta. Generalmente, si procede con la terza e più comunemnte con la quarta soluzione utilizzando il metodo POST.
+            La prima soluzione presenta chiari svantaggi: non funzionerebbe se l'indirizzo fosse pubblico, assegnato dinamicamente o fasullo. La seconda soluzione è obsoleta. Generalmente, si procede con la terza e più comunemente con la quarta soluzione utilizzando il metodo POST.
             
             \vspace{3mm}
             
-            E' importante assicurare la massima sicurezza dei dati trasmessi (si pensi alle password). Si punta alla confidenzialità, all'integrità, all'autenticità e al non ripudio (confermare mittente e destinatario dei dati) delle informazioni sensibili trasmesse. In genere, la sicurezza dell'autenticazione (e non solo) viene implementata tramite dei canali di trasporto ad hoc, come l'SSL o il TLS, che è alla base dell'HTTPS, un protocollo più sicuro e sostitutivo dell'HTTP, che aggiunge un livello che si occupa della gestione della sicurezza nella comunicazione dei messaggi fra richieste e risposte. E' basato sulla crittografia a chiave pubblica e sui certificati per autenticare il server.
+            E' importante assicurare la massima sicurezza dei dati trasmessi (si pensi alle password). Si punta alla confidenzialità, all'integrità, all'autenticità e al non ripudio [quest'ultima non verificata] (confermare mittente e destinatario dei dati) delle informazioni sensibili trasmesse. In genere, la sicurezza dell'autenticazione (e non solo) viene implementata tramite dei canali di trasporto ad hoc, come l'SSL o il TLS, che è alla base dell'HTTPS, un protocollo più sicuro e sostitutivo dell'HTTP, che aggiunge un livello che si occupa della gestione della sicurezza nella comunicazione dei messaggi fra richieste e risposte. E' basato sulla crittografia a chiave pubblica e sui certificati per autenticare il server.
             
             \vspace{3mm}
             
@@ -245,3 +245,17 @@
                 \textbf{Invalidation:} è normalmente un effetto collaterale di altre
                 request che hanno attraversato la cache. Se per esempio viene mandata una POST, una PUT o una DELETE a un URL, il contenuto della cache deve essere e viene automaticamente invalidato.
             \end{itemize}
+        
+    \subsection{Breve storia dell'HTML}
+    
+        HTML 1.0-2.0 -- 1989-1991. Le pagine abilitavano l'ipertesto. Ognuno aveva una sua homepage.
+        
+        HTML 3 -- 1995. "Browser Wars" fra Netscape e Microsoft. Le aziende aggiungevano delle estensioni proprietarie che obbligavano gli sviluppatori a creare pagine web distinte per ogni browser.
+        
+        HTML 4 -- 1998. La fine delle "Browser Wars". Il W3C, World Wide Web Consortium, si pone l'obiettivo di creare un singolo standard HTML per ogni browser. Si separò, inoltre, il markup HTML dalla stilizzazione in CSS.
+        
+        HTML 4.01 -- 1999. The Good Life.
+        
+        XHTML 1.0 -- 2001. L'XHTML fu sviluppato per rendere l'HTML più estendible e incrementare l'interoperabilità con altre strutture dati. La gente lo odiava.
+        
+        HTML5 -- 2009. Il matrimonio fra XML e HTML finì malissimo, e lo si rimpiazzò con HTML 5. Integrò nuove features per creare applicazioni web moderne e flessibili.
