@@ -2,4 +2,4 @@
 
 ### Shared LaTeX Projects
 
-- [Reti di Calcolatori / Tecnologie Software per il Web](https://www.overleaf.com/read/sfmprvbvqykq)
+- [Reti di Calcolatori](https://www.overleaf.com/read/sfmprvbvqykq)
