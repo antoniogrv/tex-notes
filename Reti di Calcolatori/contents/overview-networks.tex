@@ -1,10 +1,9 @@
-\section{Comunicazione dei dati}
-    L’espressione \textit{comunicazione dati} fa riferimento allo scambio di dati fra due
-    dispositivi grazie all’utilizzo di un mezzo trasmissivo, come un cavo. Affinché la comunicazione fra due dispositivi abbia luogo è necessario che i due dispositivi siano parte di un sistema di comunicazione fatto di hardware e di software.
+\section{Overview}
+    L’espressione \textit{comunicazione dati} fa riferimento allo scambio (locale o remoto) di informazione fra due dispositivi attraverso un canale di comunicazione, il quale è caratterizzato da un mezzo trasmissivo (come un cavo). Affinché la comunicazione abbia luogo è necessario che i dispositivi siano parte di un sistema di comunicazione fatto di hardware e di software.
 
     \vspace{3mm}
     
-    Un sistema di comunicazione è composto da messaggio, mittente, destinatario, mezzo trasmissivo e protocollo.
+    Un sistema di comunicazione è composto da \textit{messaggio} (i dati che devono essere inviati), \textit{mittente} (dispositivo che spedisce il messaggio), \textit{destinatario} (dispositivo che riceve il messaggio), \textit{mezzo trasmissivo} (cammino fisico sul quale il messaggio viaggia) e \textit{protocollo} (insieme di regole, adottate dai dispositivi) che governano la comunicazione).
     
     \vspace{3mm}
     
@@ -25,9 +24,11 @@
         \textbf{Full-Duplex:} Entrambi i dispositivi possono spedire e ricevere i dati contemporaneamente.
     \end{itemize}
     
-    \subsection{Cos'è una rete}
+    \subsection{Definizione di rete e connessione}
     
-        Una \textbf{rete di calcolatori} è un insieme di dispositivi (detti \textit{nodi}) indipendenti ed interconnessi tra loro attraverso un canale di comunicazione, tramite il quale possono scambiarsi informazioni e cooperare. I vantaggi giacciono chiaramente nella possibilità di condividere risorse e collaborare, riducendo dunque i costi e distribuendo in modo omogeneo il peso computazionale. Lo svantaggio è che tutto ciò richiede una gestione difficoltosa e complessa.
+        Una \textbf{rete di calcolatori} (concettualmente nata col telegrafo nel 1840) è un insieme di dispositivi (detti \textit{nodi}) indipendenti ed interconnessi tra loro attraverso un canale di comunicazione, tramite il quale possono scambiarsi informazioni e cooperare. I vantaggi giacciono chiaramente nella possibilità di condividere risorse e collaborare, riducendo dunque i costi e distribuendo in modo omogeneo il peso computazionale. 
+        
+        Inoltre, una rete può garantire affidabilità e \textit{fault tolerance} (significa che, nell'eventualità del crash di un nodo, si ha a disposizione una copia replicata del servizio affinché l'utente comunque accedere al medesimo servizio). Lo svantaggio è che tutto ciò richiede una gestione difficoltosa e complessa.
         
         \vspace{3mm}
         
@@ -40,7 +41,9 @@
             collegamento. Un esempio pratico è un cavo che connette due computer.
             
             \item
-            Una \textbf{connessione multipunto} è un collegamento condiviso da più di due dispositivi. La capacità di un collegamento multipunto va condivisa fra i dispositivi che lo usano. La condivisione può avvenire temporalmente se l’accesso al mezzo trasmissivo è esclusivo, motivo per cui l'utilizzo del collegamento è a turnazione. Se il canale trasmissivo ammette un utilizzo simultaneo da parte di più dispositivi allora si parla di condivisione dello spazio.
+            Una \textbf{connessione multipunto} è un collegamento condiviso da più di due dispositivi. La capacità di un collegamento multipunto va condivisa fra i dispositivi che lo usano. La condivisione può avvenire temporalmente se l’accesso al mezzo trasmissivo è esclusivo, motivo per cui l'utilizzo del collegamento è \textit{a turnazione}. 
+            
+            Se il canale trasmissivo ammette un utilizzo simultaneo da parte di più dispositivi allora si parla di \textit{condivisione dello spazio}.
         \end{itemize}
         
         La \textbf{topologia} descrive come i nodi sono fisicamente connessi da un mezzo trasmissivo, e possono essere di quattro tipi: \textit{mesh}, \textit{stella}, \textit{bus} e \textit{anello}. E' anche possibile elaborare soluzioni ibride.
@@ -51,7 +54,7 @@
             
             Utilizzando dei collegamenti simplex occorrono \(n*(n-1)\) collegamenti per una mesh; invece, utilizzando dei collegamenti duplex occorrerebbero \(n*(n-1)/2\) collegamenti.
             
-            Il numero di collegamenti è dunque quadratico rispetto al numero di nodi.
+            Il numero di collegamenti è quadratico rispetto al numero di nodi.
             
             Il vantaggio è che ogni coppia di nodi può comunicare indipendentemente da ogni altra coppia, assicurando affidabilità e sicurezza. Lo svantaggio è che serviranno molti cavi per collegare i nodi.
             
@@ -77,6 +80,8 @@
             
             Se il connettore è troppo lungo, il segnale perde d'intensità, limitando notevolmente il numero di connettori e quindi di nodi che si possono collegare al bus. Il vantaggio di questa soluzione è la facilità di installazione di un nuovo nodo. In ogni caso, la gestione dei problemi relativi al bus in sé è difficoltosa e un guasto al connettore potrebbe blocare tutte le connessioni.
             
+            Inoltre, l'amministratore di rete deve posizionare adeguatamente i nodi affinché i connettori siano distanziati e non entrino in conflitto.
+            
             \begin{center}
                 \includegraphics[scale=0.090]{images/BusNetwork.png}
             \end{center}
@@ -93,11 +98,25 @@
             \end{center}
         \end{itemize}
         
-        Una rete è categorizzabile anche in base alla sua dimensione (LAN, MAN, WAN, Interrete). Esistono molte "\textit{internet}", ma la più grande è "\textit{Internet}".
+        Le topologie ibride impiegano più tipi di topologie combinate.
     
     \subsection{Internet e Internet Service Providers}
     
-        \textbf{Internet} è una rete di reti che usa il protocollo TCP/IP e il \textit{Packet Switching}. La sua origine può essere datata al 1945 e attribuita al progetto \textbf{Memex} di Bush, che si prefiggeva l'obiettivo di "\textit{mettere in relazione informazioni in maniera simile al cervello umano}", poi meglio concretizzato nella rete \textbf{ARPANET} degli Stati Uniti, che connetteva una ventina di computer.
+        Una rete è categorizzabile anche in base alla sua dimensione (LAN, MAN, WAN, Interrete). Esistono molte "\textit{internet}", ma la più grande è "\textit{Internet}".
+    
+        \textbf{Internet} è una rete di reti che usa il protocollo TCP/IP (progenie del Dr. Vinton Cerf, citato per la prima volta nel 1974) e il \textit{Packet Switching} (i dati vengono impacchettati, suddivisi e seguono più percorsi per raggiungere la destinazione). 
+        
+        \vspace{3mm}
+        
+        La sua origine può essere datata al 1945 (grazie, fra gli altri, al pioniere Vannervar Bush, autore degli ipertesti - termine coniato in origine da Ted Nelson) e attribuita al progetto \textbf{Memex}, che si prefiggeva l'obiettivo di "\textit{mettere in relazione informazioni in maniera simile al cervello umano}", poi meglio concretizzato nella rete \textbf{ARPANET} degli Stati Uniti, il cui primo nodo è datato 1969 e che inizialmente connetteva fra i 4 e i 23 computer.
+        
+        Analogamente, Claude Shannon contribuì concenependo la rappresentazione binaria dei dati (\textbf{Modern Information Theory}), mentre Joseph Liklider concepì il computer come "\textit{communication device}"); Paul Baron inventò la commutazione di pacchetto, Vinton Cerf e Robert Kahn lavorarono al TCP/IP, Tim Barners-Lee introdusse l'HTTP e il WWW, e Mark Andreesen creò il primo web browser. Altre figure moderne importanti sono Steve Jobs, Paul Allen, Larry Page, Sergey Brin, Mark Zuckerberg, e molte altre.
+        
+        Dal 1994 al 1999, si susseguirono l'introduzione del World Wide Web, la nascita di Java, la pubblicazione di Windows 95 e la presentazione di VRML - tutti eventi che concorsero allo sviluppo di Internet, che ebbe il suo massimo splendore nella "guerra del commercio elettronico" fra Netscape e Microsoft del 1996-1997.
+        
+        \vspace{3mm}
+        
+        Uno sviluppo naturale di Internet è stato l'\textit{Internet of Things}, grazie al quale gli oggetti di tutti i giorni acquisiscono la capacità di comunicare e accedere ad informazioni aggregate.
         
         \vspace{3mm}
         
@@ -105,11 +124,13 @@
         
         \vspace{3mm}
         
-        Si hanno ISP di livello 1 o "\textit{reti dorsali di Internet}" (AT\&T, Sprint, Telecom), di livello 2 o "\textit{reti nazionali}", e di livello 3 o "\textit{reti locali}". Ciò significa che un pacchetto passa attraverso più reti per arrivare alla destinazione.
+        La struttura di Internet è organizzata a cerchi concentrici: si hanno ISP di livello 1 o "\textit{reti dorsali di Internet}" (AT\&T, Sprint, Telecom - è il livello più centrale dei cerchi concentrici), di livello 2 o "\textit{reti nazionali}", e di livello 3 o "\textit{reti locali}". Ciò significa che una richiesta passa attraverso più ISP, e quindi reti, per arrivare alla destinazione.
+        
+        Le reti dorsali di Internet sfruttano i "\textit{Core Routers}", cioè router efficienti e di grandi dimensioni situati in località strategiche.
     
-    \subsubsection{Accenni ai protocolli di rete}
+    \subsubsection{Caratteristiche dei protocolli di rete}
     
-        I sistemi terminali ed i commutatori di pacchetti fanno uso di \textbf{protocolli} (ossia regole che permettono la comunicazione fra due \textit{peer}) per l’invio e la ricezione dei dati. Un protocollo definisce il formato e l’ordine dei messaggi scambiati tra due o più entità in comunicazione, così come le azioni intraprese in fase di trasmissione e/o ricezione di un messaggio o di un altro evento.
+        I sistemi terminali ed i commutatori di pacchetti fanno uso di \textbf{protocolli} (ossia regole che permettono la comunicazione fra due \textit{peer}) per l’invio e la ricezione dei dati. Un protocollo definisce il formato, l'interpretazione e l’ordine dei messaggi scambiati tra due o più entità in comunicazione, così come le azioni intraprese in fase di trasmissione e/o ricezione di un messaggio o di un altro evento.
         
         \vspace{3mm}
         
@@ -121,5 +142,6 @@
         
         \vspace{3mm}
         
-        Infine, gli \textit{standard} sono di fondamentale importanza per avere un mercato libero in cui i vari produttori di dispositivi possano operare per garantire l’interoperabilità di tali apparati. Forniscono delle linee guida a chiunque (produttori di hardware e software, venditori, agenzie governative, fornitori di servizi) sia coinvolto nello sviluppo di una interrete pubblica. Si classificano in "\textit{de facto}" e "\textit{de jure}". Chiaramente, anche Internet segue degli standard.
-
+        Infine, gli \textit{standard} sono di fondamentale importanza per avere un mercato libero in cui i vari produttori di dispositivi possano operare per garantire l’interoperabilità di tali apparati. Forniscono delle linee guida a chiunque (produttori di hardware e software, venditori, agenzie governative, fornitori di servizi) sia coinvolto nello sviluppo di una interrete pubblica. Si classificano in "\textit{de facto}" e "\textit{de jure}". 
+        
+        Chiaramente, anche Internet segue degli standard. La proposta per l'introduzione di un nuovo standard è chiamata "\textit{draft}"; se la proposta viene approvata, diventa un RFC (\textit{Request For Comment}). Valutata la fattibilità e maturata la proposta, essa diventa uno standard universalmente accettato.

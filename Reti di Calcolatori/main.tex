@@ -2,6 +2,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\renewcommand{\contentsname}{Indice dei contenuti}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
 
 \title{Reti di Calcolatori}
 \author{Appunti (G)}
@@ -13,8 +17,8 @@
 
 \tableofcontents
 
-\include{RC/1}
-\include{RC/2}
+\include{contents/overview-networks}
+\include{contents/overview-iso-osi}
 \include{RC/3}
 \include{RC/4}
 \include{RC/5}
