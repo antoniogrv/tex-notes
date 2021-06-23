@@ -1,0 +1,178 @@
+\section{Data Link}
+
+    Lo strato fisico, come abbiamo visto, ha l'obiettivo di inviare i dati lungo il mezzo trasmissivo. 
+    
+    Lo \textbf{strato di collegamento}, invece, ha la funzione di controllo dell'accesso al mezzo trasmissivo. 
+    
+    In particolare, le funzioni principali dello strato di collegamento riguardano:
+    
+    \begin{itemize}
+        \item Framing
+        \item Controllo degli errori
+        \item Controllo di flusso
+        \item Protocolli per la trasmissione dei frame da un nodo ad un altro
+    \end{itemize}
+    
+    Per implementare tali funzioni di controllo occorrono protocolli, in particolare il \textbf{protocollo HDLC} (orientato ai bit) e il \textbf{protocollo PPP} (orientato ai byte).
+    
+    \subsection{Framing}
+        Lo strato di collegamento si occupa di organizzare i bit in \textit{frame}. Quando si parla di \textit{messaggi}, si intendono blocchi di frame. I frame possono avere dimensione fissa o varriabile.
+        
+        \vspace{3mm}
+        
+        La \textbf{dimensione fissa} non esige l'utilizzo di delimitatori fra i frame, poiché la dimensione ha anche ruolo di delimitatore. Potrebbe rappresentare uno svantaggio in termini di spreco di risorse. 
+        
+        La \textbf{dimensione variabile} è utilizzata nelle reti LAN e in Internet. I frame a dimensione variabile possono essere orientati ai byte o ai bit.
+        
+        \subsubsection{Framing orientato ai byte}
+        
+            I frame orientati ai byte sono costituiti sequenze di byte. L'intestazione e la coda conterranno varie informazioni relative al frame; vi è, inoltre, un byte speciale che funge da delimitatore (all'inizio e alla fine del frame). LE' una tecnica problematica per l'invio di dati complessi, poiché il valore del byte delimitatore potrebbe appaire nei dati veri e propri. La soluzione a questo problema è il byte stuffing.
+            
+            \vspace{3mm}
+            
+            Il \textbf{byte stuffing} non risolve completamente il problema ma ne riduce l'incidenza. Sostanzialmente, si sceglie un delimitatore (flag) e, ogni qualvolta si trova un flag, lo si anticipa con un ulteriore carattere speciale (detto $ESC$). 
+            
+            E' lecito osservare che pure questo carattere potrebbe apparire nei dati veri e propri: la soluzione (non del tutto funzionale) è aggiungere ulteriori caratteri speciali (formalmente, si aumenta la \textit{complessit}à dei delimitatori).
+        
+        \subsubsection{Framing orientato ai bit}
+        
+            I frame orientati ai bit sono costituiti da sequenze di bit. L'intestazione e la coda conterranno varie informazioni relative al frame; come delimitatore si sceglie una speciale sequenza di bit, tipicamente $01111110$.
+            
+            Analogamente al framing orientato ai byte, la sequenza di bit delimitatrice potrebbe comparire nei dati veri e propri, motivo per cui si è elaborato il bit stuffing.
+            
+            \vspace{3mm}
+            
+            Il \textbf{bit stuffing} stabilisce che il mittente sia obbligato a inserire uno 0 alla fine di una sequenza consecutiva di uno 0 e cinque 1. Il destinatario, se riceverà una sequenza $0111110$, eliminerà l'ultimo zero. Questa tecnica consente che nella sequenza non compaia mai una sequenza del tipo $011111...$, prevenendo l'invio di dati indesiderati.
+            
+    \subsection{Controllo del flusso}
+    
+        Il controllo del flusso permette il controllo della velocità di spedizione fra mittente e destinatario. In particolare, si tratta della velocità con la quale il mittete può spedire, e con cui il destinatario può ricevere. E' importante che mittente e destinatario abbiano velocità paragonabili in modo da prevenire problemi di varia natura.
+        
+        In termini generali, il controllo del flusso fa riferimento ad un insieme di procedure utilizzate per limitare la quantità di dati che il mittente può spedire senza aspettare un riscontro.
+        
+    \subsection{Controllo degli errori}
+    
+        Abbiamo già visto le tecniche di controllo degli errori nello strato fisico. 
+        
+        Alcune tecniche, come i codici ciclici, vengono impiegate già nello strato di collegamento. E' importante sapere che lo strato di collegamento impone che i dati siano ritrasmessi in modo corretto, in caso di errore.
+        
+    \subsection{Protocolli di trasmissione}
+    
+        Nella situazione idealistica di canali di trasmissione privi di rumore, si profilano i protocolli \textit{Semplice} e \textit{Stop-and-Wait}. Per canali dotati di rumore, si hanno i protocolli \textit{Stop-and-Wait ARQ}, \textit{Go-Back-N ARQ} e \textit{Ripetizione Selettiva ARQ}.
+        
+        Tutti i protocolli possono essere unidirezionali e bidirezionali. Queste ultime possono essere viste come due comunicazioni unidirizionali.
+        
+        \subsubsection{Protocollo Semplice}
+        
+            Il mittente spedisce i frame uno alla volta, uno dopo l'altro, senza preoccuparsi di nulla. Dato che il canale è senza rumore, i frame non si perdono e non ci sono errori.
+            
+            Il destinatario è in attesa di un frame; alla ricezione, il frame viene trasportato agli strati superiori.
+                    
+            E' un protocollo di facile implementazione. Tuttavia, considerando che il destinatario richiede un certo lasso di tempo per processare ogni frame, si verifica un un ritardo di elaborazione.
+            
+        \subsubsection{Protocollo Stop-and-Wait}
+            
+            Evoluzione del protocllo semplice. Il mittente invia i frame, ma questa volta attende un riscontro dal destinatario, detto \textit{ACK}, per inviarne un altro.
+        
+        \subsubsection{Protocollo Stop-and-Wait ARQ}
+        
+            In una situazione reale con canali dotati di rumore, i frame si possono perdere e gli errori si possono verificare. Si introduce dunque il protocollo Stop-and-Wait \textit{ARQ}, che sta per \textit{Automatic Repeat Request}.
+            
+            In caso di perdita di frame o di mancata ricezione di un ACK, il frame viene reinviato. 
+            
+            Si numerano i frame con numeri di sequenza compresi fra 0 e $2^m -1$ bit. Se vi sono più di $2^m - 1$ bit occorre riprendere la numerazione da 0. Nella fattispecie del protocollo in esame, si possono numerare al più 2 frame consecutivi (quindi con numerazioni 0 e 1), portando traccia non solo del frame inviato, ma anche del prossimo da spedire.
+            
+            Lo Stop-and-Wait è inefficiente, nonostante funzioni bene, dato che devo attendere l'ACK - in particolare, è un problema se posso inviare più frame contemporaneamente. Allora potremmo immaginare di inviare un blocco di frame, piuttosto che un singolo frame, e agganciare a tale blocco l'ACK.
+        
+        \subsubsection{Protocollo Go-back-N ARQ}
+        
+            Il mittente spedisce più frame prima di aspettare un riscontro. Il numero di frame che si possono spedire dipende da $m$ (bit per il numero di sequenza). Con $m$ bit si hanno al più $2^m$ numeri di sequenza, che andranno da 0 a $2^m -1$. Si possono avere, dunque, al più $2^m - 1$ frame.
+            
+            Per poter gestire un gruppo di frame da inviare per avere un riscontro, si usa una finestra immaginaria, detta finestra scorrevole, dentro la quale si può operare. La dimensione della finestra sarà il numero massimo di frame che si possono spedire contemporaneamente. Mittente e destinatario avranno, ciascuno, una propria versione della finestra.
+            
+            Questo protocollo prevede un \textbf{timeout} che si utilizza per rispedire i frame. Alla scadenza del timeout, l'algoritmo spedisce tutti i frame della finestra non ancora inviati. 
+            
+            Il destinatario spedisce un riscontro ACK. Frame arrivati fuori ordine o con errore vengono ignorati. Per riscontri cumultavi, il singolo ACK conferma anche tutti i frame precedenti.
+            
+            L'aspetto inefficiente di questo protocollo è la rispedizione allo scadere del timeout, che risulta molto inefficiente. Una soluzione potrebbe essere la \textit{ripetizione selettiva}, cioè la rispedizione esclusiva dei frame che non arrivano.
+            
+    \subsection{Protocolli di accesso multiplo}
+        
+        Tutti i protocolli descritti assumono la disponibilità di un canale diretto fra mittente e destinatario. Tuttavia, quando i nodi di una rete sono connessi tramite canali multipunto, occorre un protocollo che gestisca l'accesso al canale. Tale protocollo dovrà definire le modalità e tempistiche di accesso al canale di comunicazione.
+            
+        I protocolli di accesso si suddividono in tre grandi categorie.
+            
+        \begin{itemize}
+            \item 
+                \textbf{Protocolli ad accesso casuale} (ALOHA, CSMA, CSMA/CD, CSMA/CA)
+                
+            \item 
+                \textbf{Protocolli ad accesso controllato} (Prenotazione, Sondaggio, Testimone)
+                
+            \item 
+                \textbf{Protocolli ad accesso multiplo}, detto anche di canalizzazione. 
+                
+                E' basato sulla condivisione della larghezza di banda.
+                
+                \begin{itemize}
+                    \item 
+                        FDMA, basato sulla divisione di frequenza
+                    
+                    \item 
+                        TDMA, basato sulla divisione del tempo
+                        
+                    \item 
+                        CDMA, basato sulla divisione della codifica
+                \end{itemize}
+        \end{itemize}
+            
+        \subsubsection{Protocolli di accesso casuale}
+        
+            Detto anche \textit{accesso a contesa}, questi protocolli prevedono che nessun nodi abbia il controllo esclusivo del mezzo trasmissivo, il che porta - appunto - ad una contesa fra i nodi, logicamente causa di plausibili collisioni.
+            
+            \subsubsubsection{ALOHA}
+            
+                Ogni nodo spedisce quando vuole, con possibilità di collisione (che distrugge i frame, risultando non ricevuti da parte del destinatario). In particolare, l'ALOHA utilizza il meccanismo dei riscontri (ACK). Vi è un tempo di attesa prima della rispedizione, detto \textbf{tempo di backoff} $T_B$. 
+                
+                Vi è un numero massimo di rinvii denotato con $K_max$, al raggiungimento del quale si abbandona il tentativo di rinvio. Con tempo di vulnerabilità, invece, intendiamo l'arco temporale durante il quale vi è possibilità di collisione che, nell'ALOHA, è 2 volte il tempo di trasmissione di un frame.
+                
+                \vspace{3mm}
+                
+                Una variante dell'ALOHA, detto \textit{ALOHA ad intervalli}, si propone di ridurre il tempo di vulnerabilità, dividendo il tempo ad intervalli e spedendo solo all'inizio di ciascun intervallo.
+                
+            \subsubsubsection{CSMA}
+            
+                Si controlla il mezzo trasmissivo prima di inviare i dati: se vi è già una trasmissione in corso, è inutile e dannoso trasmettere altri dati. Questo meccanismo di controllo riduce le collisioni, ma non le previene.
+                
+                Il tempo di vulnerabilità rimane pari al tempo di propagazione $T_P$.
+                
+                \vspace{3mm}
+                
+                Il protocollo CSMA ha necessità di integrare un meccanismo intelligente di controllo del canale, detto \textbf{metodo di insistenza}.
+                
+                Il metodo di insistenza può essere:
+                
+                \begin{itemize}
+                    \item $1$-\textit{insistenza}, che controlla ripetutamente
+                    \item \textit{Non insistenza}, che attende un tempo casuale prima di ricontrollare
+                    \item $p$-\textit{insistenza}, che controlla con una certa probabilità $p$
+                \end{itemize}
+                
+                La variante \textbf{CSMA/CD} controlla il mezzo trasmissivo anche durante la spedizione, annullandola se si accorge di una collisione. Inoltre, i frame devono essere abbastanza grandi per rilevare eventuali collisioni, dato che il tempo di propagazione dipende dalla dimensione dei frame.
+                
+                In alternativa, la variante \textbf{CSMA/CA} evita che la trasmissione inizi immediatamente quando il canale è libero. Si attende un certo periodo di tempo e si aspetta un ulteriore intervallo detto \textit{finestra di contesa}, similmente al metodo di p-insistenza.
+        
+        \subsubsection{Protocolli di accesso controllato}
+        
+            Vediamo brevemente i protocolli di accesso controllato, osservando che in questo caso - a differenza dell'accesso casuale - le stazioni si accordano su quando spedire.
+            
+            \begin{itemize}
+                \item 
+                    \textbf{Prenotazione}. Un frame speciale di prenotazione attraversa il mezzo e segnala la spedizione. Solo le stazioni che hanno prenotato possono spedire.
+                
+                \item 
+                    \textbf{Sondaggio}. Prevede una stazione primaria che gestisce la comunicazione, chiedendo ai nodi chi se hanno dati da spedire. Chiaramente, la stazione primaria è coinvolta in tutte le comunicazioni.
+                    
+                \item
+                    \textbf{Testimone.} Tipico di una rete ad anello, prevede un frame speciale posseduto solo da chi può effettuare la spedizione, scambiato poi con altre stazioni al termine della trasmissione.
+            \end{itemize}

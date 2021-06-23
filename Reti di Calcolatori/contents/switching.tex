@@ -1,11 +1,13 @@
 \section{Commutazione}
-    Come ormai sappiamo bene, una rete è un insieme di dispositivi connessi tra di loro in base alla topologia adottata (nella mesh, canale punto-punt per ogni coppia di dispositivi; in alternativa, nella topologia a stella, vi è un nodo centrale e un canale fra tale nodo e ogni altro dispositivo). 
+    Come ormai sappiamo bene, una rete è un insieme di dispositivi connessi tra di loro in base alla topologia adottata (nella topologia mesh, canale punto-punto per ogni coppia di dispositivi; in alternativa, nella topologia a stella, vi è un nodo centrale e un canale fra tale nodo e ogni altro dispositivo). 
     
     La connessione è tale da connettere \textit{ogni} coppia di dispositivi. Nella realtà, quest'idea non è praticabile. Il numero e la lunghezza dei collegamenti costituirebbero costi troppi elevati. La soluzione è lo \textbf{switching}, cioè la commutazione.
     
     \vspace{3mm}
     
-    Per connettere un insieme di nodi terminali (\textit{stazioni}), vengono utilizzati dei \textbf{nodi speciali interconnessi} (\textit{switch}), cioè dei dispositivi capaci di \textbf{creare connessioni temporanee} fra due o più stazioni connesse agli switch. Il loro utilizzo è limitato alla creazione di connessioni temporanee. Uno switch ha varie modalità di funzionamento, dette \textbf{commutazioni}.
+    Per connettere un insieme di nodi terminali (\textit{stazioni}), vengono utilizzati dei \textbf{nodi speciali interconnessi} (\textit{switch}), cioè dei dispositivi capaci di \textbf{creare connessioni temporanee} fra due o più stazioni connesse agli switch. Il loro utilizzo è limitato alla creazione di connessioni temporanee. Uno switch ha varie modalità di funzionamento, dette \textbf{commutazioni}. 
+    
+    Fondamentalmente, gli switch creano percorsi fra due nodi terminali.
     
     \subsection{Categorie di commutazioni}
     
@@ -35,17 +37,17 @@
             \end{itemize}
         \end{itemize}
     
-        \subsubsection{Reti a commutazione di circuito}
+        \subsubsection{Commutazione di circuito}
                     
             La commutazione avviene nello \textbf{strato fisico}.
                 
-            Prima di iniziare la comunicazione, le stazioni devono effettuare una prenotazione delle risorse necessarie per la comunicazione. \textbf{Gli switch prenotano le risorse e definiscono il percorso}; tali risorse devono rimanere dedicate a questa connessione per tutta la durata del trasferimento dei dati, fino alla fase di eliminazione del circuito.
+            Un nodo vuole inviare informazioni ad un altro nodo della rete. Prima di iniziare la comunicazione, le stazioni (nodi) devono effettuare una prenotazione delle risorse necessarie per la comunicazione. \textbf{Gli switch prenotano le risorse e definiscono il percorso}; tali risorse devono rimanere dedicate a questa connessione per tutta la durata del trasferimento dei dati, fino alla fase di eliminazione del circuito.
                 
             \vspace{3mm}    
             
-            I dati trasferiti tra due stazioni non sono divisi in pacchetti, ma spediti in un flusso continuo dalla stazione mittente a quella destinataria.
+            I dati trasferiti tra due stazioni non sono scomposti in pacchetti, ma spediti in un flusso continuo dalla stazione mittente a quella destinataria.
                 
-            Inoltre, non c'è bisogno di indirizzamento durante il trasferimento dei dati. Gli switch instradano i dati in base al canale riservato nella fase di instaurazione del circuito. Il vantaggio della commutazione di circuito giace nell'assenza di tempo di attesa negli switch.
+            Inoltre, non c'è bisogno di indirizzamento durante il trasferimento dei dati dato che il circuito viene attribuito a priori. Gli switch instradano i dati in base al canale riservato nella fase di instaurazione del circuito. Il vantaggio della commutazione di circuito giace nell'assenza di tempo di attesa negli switch.
 
             \vspace{3mm}
             
@@ -126,21 +128,25 @@
                     $III$ spedisce la richiesta di chiusura a $M$
             \end{itemize}
             
-        \subsubsection{Reti a datagram}
+            Il \textit{tempo necessario} ad inviare dati lungo una rete a commutazione di circuito è la somma del tempo necessario a svolgere le tre fasi sopraelencate. 
+            
+            Il \textit{ritardo}, invece, è la somma del tempo di propagazionme della richiesta della stazione sorgente, del tempo necessario a trasferire la richiesta, del tempo di propagazione della risposta della stazione destinatario e del tempo per trasferire la risposta.
+            
+        \subsubsection{Commutazione di pacchetto}
         
-            I messaggi devono essere divisi in pacchetti, detti \textbf{datagram}, a lunghezza variabile o fissa.
+            I messaggi devono essere divisi in pacchetti, detti \textbf{datagram}, a lunghezza variabile o fissa. Si smistano i pacchetti lungo la rete in maniera ottimale.
             
             La grandezza dei pacchetti è determinata dalla rete e dal protocollo che ne gestisce il funzionamento. Non c'è allocazione di risorse per un pacchetto; non ci sono canali riservati, né risorse riservate negli switch. I pacchetti sono gestiti tramite FIFO.
             
             \vspace{3mm}
             
-            I pacchetti vengono instradati verso la loro destinazione tramite le \textbf{tavole di routing}, che contiene informazioni di instradamento in funzione dell'indirizzo di destinazione.
+            I pacchetti vengono instradati verso la loro destinazione tramite le \textbf{tavole di routing}, che contiene informazioni di instradamento in funzione dell'indirizzo di destinazione. Gli switch, dunque, sono dotati di queste tavole di routing.
             
             \vspace{3mm}
             
-            I ritardi di una rete a datagram possono essere maggiori di quelli in una rete a circuito. Ogni pacchetto potrebbe subire un ritardo negli switch prima di essere inoltrato.
+            I ritardi di una rete a datagram possono essere maggiori di quelli in una rete a circuito. Ogni pacchetto potrebbe subire un significativo ritardo su ogni switch prima di essere inoltrato. Chiaramente, questo dipende dalla grandezza della struttura di tipo FIFO.
             
-        \subsubsection{Reti a circuito virtuale}
+        \subsubsection{Commutazione a circuito virtuale}
         
             Sono una via di mezzo fra la commutazione di circuito e la commutazione di datagram e sintetizza le caratteristiche di entrambe.
             
@@ -152,6 +158,10 @@
             
             Tutti i pacchetti seguono lo stesso percorso, stabilito durante la connessione. Le risorse necessarie sono prenotate, come nella commutazione di circuito. E' implementata nello strato di collegamento, fisico e di rete.
             
+            \begin{center}
+                \includegraphics[scale=0.5]{images/Tavola-di-Routing.png}
+            \end{center}
+            
             \vspace{3mm}
             
             Utilizza due tipi di instradamento: \textit{globale} (qualsiasi nodo della rete deve avere un indirizzo globale) e \textit{locale} (degli identificatori di circuito virtuali - VCI - vengono usati per trasferire dati; i VCI sono numeri con significati locali, in base alla coppia di switch: in pratica, combina switch a switch).
@@ -162,10 +172,14 @@
         
         \vspace{3mm}
         
-        Negli switch a divisione di spazio, i circuiti sono separati fisicamente. Ogni switch occupa il proprio spazio, e originariamente furono progettati per reti analogiche. 
+        Negli \textbf{switch a divisione di spazio}, i circuiti sono separati fisicamente. Ogni switch occupa il proprio spazio, e originariamente furono progettati per reti analogiche. 
         
-        Gli switch a crossbar dispongono $n$ linee di input verso $m$ linee di output. I punti di incrocio sono $n*n$. Gli switch a più livelli combinano vari switch crossbar a più livelli, appunto. Il vantaggio degli switch a divisione di spazio è la comunicazione istantanea; lo svantaggio è il numero di punti di incrocio necessari affinché lo switch non sia bloccante.
+        Gli switch a \textit{crossbar} dispongono $n$ linee di input verso $m$ linee di output. I punti di incrocio sono $n*n$. Gli switch \textit{a più livelli} combinano vari switch crossbar a più livelli, appunto. Il vantaggio degli switch a divisione di spazio è la comunicazione istantanea; lo svantaggio è il numero di punti di incrocio necessari affinché lo switch non sia bloccante.
         
-        Gli switch a divisione di tempo utilizzano il TDM con tecnologia a scambio di intervalli temporali (TSI). Il vantaggio degli switch a divisione di tempo è che non richiede punti di incrocio; lo svantaggio è che la gestione di ogni connessione crea ritardi.
+        \vspace{3mm}
+        
+        Gli \textbf{switch a divisione di tempo} utilizzano il TDM con tecnologia a scambio di intervalli temporali (TSI). Il vantaggio degli switch a divisione di tempo è che non richiede punti di incrocio; lo svantaggio è che la gestione di ogni connessione crea ritardi.
+        
+        \vspace{3mm}
         
         Infine, gli \textbf{switch misti} combinano gli switch a divisione di spazio e divisione di tempo.
