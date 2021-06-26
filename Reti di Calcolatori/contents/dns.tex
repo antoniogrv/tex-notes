@@ -1,1 +1,75 @@
 \section{Domain Name System}
+
+    Saliamo per l'ultima volta di livello e arriviamo allo strato di applicazione.
+    
+    \vspace{3mm}
+    
+    Lo \textbf{strato di applicazione} fornisce i servizi di rete all'utente finale.
+    
+    \vspace{3mm}
+    
+    Il \textbf{Domain Name System} (DNS) permette di utilizzare dei nomi di dominio al posto degli indirizzi IP, creando un'associazione fra i due per i quali offre un servizio di traduzione. Si tratta di un'\textit{applicazione di servizio} che viene utilizzata da altre applicazioni.
+    
+    Un client DNS contatta un server DNS (detto \textit{Name Server}) per tradurre il nome di un dominio in indirizzo IP. Ovviamente, il client DNS deve conoscere l'indirizzo IP del server DNS per poter dialogare.
+    
+    \vspace{3mm}
+    
+    Lo \textbf{spazio dei nomi di dominio} è l'insieme di tutti i possibili nomi di dominio utilizzabili su Internet. 
+    
+    Un \textbf{nome di dominio} è una sequenza di caratteri con una forma speciale, ossia una struttura gerarchica. 
+    
+    \vspace{3mm}
+    
+    I caratteri seguono uno specifico schema e sono sono organizzati a livelli, separati da un punto. Ogni nodo dell'albero dei nomi di dominio è caratterizzato da una \textit{etichetta}, che è una sequenza di 63 caratteri. 
+    
+    \vspace{3mm}
+    
+    L'etichetta della radice è una stringa vuota, e per mantenere l'univocità dei nomi dello spazio, tutti i figli di un nodo devono avere etichette diverse. 
+    
+    \vspace{3mm}
+    
+    Un nome di dominio è detto "\textit{fully qualified}" quando rappresenta un percorso completo sull'albero (e cioè che arriva alla radice) dello spazio dei nomi di dominio, e terminano con un punto. Solo un nome di dominio del genere può corrispondere ad un indirizzo IP. In alternativa, i nomi di dominio sono detti parziali.
+    
+    Un \textbf{dominio} è un sottoalbero dello spazio dei nomi di dominio, a sua volta diviso in \textbf{sottodomini}.
+    
+    \vspace{3mm}
+    
+    In realtà, la struttura gerarchica dello spazio dei nomi di dominio serve anche a distribuire le informazioni relative all'associazione fra nomi di dominio e indirizzi IP su vari server DNS. Le informazioni del DNS sono memorizzati sui name server, detti anche server DNS. Ne esistono moltissimi, e ogni name server è responsabile di una zona, cioè un insieme di domini.
+    
+    \vspace{3mm}
+    
+    Il server in cui giace l'intero albero dei nomi di dominio è detto \textbf{Root Name Server}. Ne esistono 13.
+    
+    \vspace{3mm}
+    
+    Un name server è detto primario se memorizza informazioni riguardano la zona per la quale ha autorità, ed è responsabile per l'aggiornamento di quella zona; è detto secondario se apprende informazioni relative alla propria zona da altri name server.
+    
+    \vspace{3mm}
+    
+    Su Internet, lo spazio dei nomi di dominio viene suddiviso in tre parti: domini generici (es. "edu" è quello delle scuole, "com" quello delle organizzazioni commerciali), delle nazioni ("us", "it") e inversi.
+    
+    \vspace{3mm}
+    
+    Per poter utilizzare un nome di dominio, occorre registrarlo. La gestione dei nomi di dominio è affidata ad organizzazioni commerciali come l'ICANN.
+    
+    \subsection{Risoluzione}
+    
+        La trasformazione di un nome di dominio in un indirizzo IP viene chiamata \textbf{risoluzione}. Quando un processo ha bisogno di trasformare un nome di dominio in indirizzo IP chiama il resolver. Esso si occuperà di contattare il server DNS più vicino, che fornirà la corrispondenza diversa. 
+        
+        Se il server non contiene la corrispondenza, si contatta un server diverso secondo una politica \textit{ricorsiva} (il primo server contattato è tenuto a fornire la risposta finale) o \textit{iterativa} (il contrario). Ogni qualvolta viene effettuata una risoluzione, viene effettuato del caching (con tempo di scadenza) sul sistema locale.
+        
+        \vspace{3mm}
+        
+        Infine, il DNS usa l'UDP e il TCP. Usa l'UDP quando i messaggi sono sufficientemente piccoli (meno di 512 byte) e TCP per messaggi grandi. Utilizza la porta 53 per ambo i protocolli.
+        
+    \vspace{20mm}
+    
+    Questo capitolo chiude gli appunti sul corso di Reti di Calcolatori. 
+    
+    Si noti che questi appunti non sono da considerarsi completi, corretti o precisi, né costituiscono materiale approvato o comunque sufficiente per superare l'esame. Potrebbero anche essere presenti numerosi errori di battitura dettati dalla fretta (\textit{cough}) di redigere il materiale.
+    
+    Inoltre, questi appunti non trattano l'ultimo capitolo insegnato dai docenti (relativo alle API) poiché - in genere - non viene richiesto all'esame.
+    
+    \vspace{5mm}
+    
+    \textit{Don't you dare go hollow.}

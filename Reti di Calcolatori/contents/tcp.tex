@@ -197,4 +197,107 @@
         
     \subsubsection{Controllo della congestione}
     
+        Il \textbf{controllo della congestione} e la \textbf{qualità del servizio} sono due aspetti del funzionamento di una rete profondamente collegati fra di loro, poiché prevenire o eliminare la congestione permette di migliorare direttamente la qualità del servizio di una rete. In generale, se si spediscono talmente tanti dati da esaurire le capacità trasmissive dei collegamenti e dei router, non è più possibile comunicare, o si riesce a farlo solo molto lentamente. Significa che la qualità del servizio dipende dalla quantità di dati trasmessi, cioè il \textbf{traffico dati}.
         
+        \vspace{3mm}
+        
+        I \textit{parametri} che caratterizzano il traffico dati sono i seguenti.
+        
+        \begin{itemize}
+            \item 
+                \textbf{Velocità massima (di picco).} Tipicamente raggiunta solo in pochi momenti.
+            
+            \item
+                \textbf{Velocità media.}
+                
+            \item
+               \textbf{Raffiche di dati.} Spedizione dei dati per un certo periodo di tempo alla velocità massima; in pratica, è il tempo in cui permane (anche con leggerre variazioni) la velocità massima. In gergo prende il nome di \textit{flashcrowds}.
+        \end{itemize}
+        
+        Un \textit{profilo del traffico} fornisce una descrizione della modalità di spedizione del traffico dati. Valuteremo tre profili: velocità costante (facile da controllare), velocità variabile (piccole raffiche di dati; difficile da gestire), a raffica (crea il numero maggiore di problemi; caratterizato da bruschi cambi di velocità di spedizione).
+        
+        \vspace{3mm}
+        
+        Quando si satura la dimensione dei buffer di input e output dei router, si verifica un fenomeno di congestione. Per valutare gli effetti della congestione si possono valutare le prestazioni della rete, tipicamente ritardo e throughput. In situazione di congestione, le prestazioni degradano.
+        
+        Il controllo della congestione può essere proattivo (pre-congestione) e reattivo (post-congestione).
+        
+        \subsubsection{Controllo proattivo}
+        
+            Serve a prevenire totalmente il fenomeno della congestione. Vi sono diverse tecniche per implementarlo.
+        
+            \subsubsubsection{Politiche di ritrasmissione}
+            
+                La decisione su quando ritrasmettere un pacchetto è importante per prevenire la congestione, perché in alcuni casi (es. quando un pachetto è in ritardo) potrebbe essere inutile spedire nuovamente il pacchetto.
+                
+            \subsubsubsection{Gestione della finestra scorrevole}
+                
+                Un meccanismo basato sulla finestra scorrevole selettiva è migliore di un algoritmo basato sul Go-Back-N. Nell'approccio Go-Back-N, allo scadere del timeout possono essere rispediti molti pacchetti, anche se alcuni di essi potrebbero essere già arrivati senza problemi. La rispedizione di pacchetti non avviene, invece, con l'approccio selettivo.
+                
+            \subsubsubsection{Regole per i riscontri}
+            
+                Se il destinatario non riscontra ogni pacchetto che riceve, potrebbe rallentare il mittente e automaticamente prevenire la congestione. Per realizzarlo vi sono vari approcci: ad esempio, il destinatario potrebbe decidere di spedire un riscontro solo dopo $n$ pacchetti. Oltre a rallentare la sorgente, spedire meno riscontri crea anche meno traffico aggiuntivo sulla rete.
+                
+            \subsubsubsection{Politiche di eliminazione dei pacchetti}
+            
+                Nei casi di congestione, il router deve eliminare i pacchetti. In realtà, i router possono decidere di eliminare dei pacchetti ancor prima della congestione - pertanto, si potrebbe decidere di eliminare alcuni pacchetti in certi tipi di trasmissione (es. audio/video) senza che l'integrità del messaggio venga fortemente danneggiato.
+                
+            \subsubsubsection{Politiche di accesso}
+            
+                Un qualsiasi router coinvolto nel circuito virtuale instaurato fra mittente e destinatario può negare la sua disponibilità, impedendo l'accesso alla rete. A volte è meglio negare l'accesso alla rete anziché congestionarla.
+                
+        \subsubsection{Controllo reattivo}
+        
+            Punta ad eliminare la congestione dopo che questa si è verificata. Anche per questo tipo di controllo esistono vari meccanismi.
+            
+            \subsubsubsection{Pressione all'indietro}
+            
+                Un nodo congestionato smette di accettaree dati dal nodo precedente nel cammino, obbligando il mittente a smettere di spedire poiché congestionerà l'intero percorso.
+                
+            \subsubsubsection{Segnalazione al mittente}
+                
+                Un router congestionato spedisce un pacchetto di segnalazione di congestione al mittente. Una realizzazione di questa tecnica è effetutata dall'ICMP.
+            
+            \subsubsubsection{Segnalazione implicita}
+            
+                Non c'è alcun tpo di comunicazione fra un nodo congestionato e il mittente.  E' il mittente stesso ad accorgersi della congestione: ad esempio, non riceve alcun riscontro è un segno valido di congestione, motivo per cui il mittente dovrebbe ridurre la velocità di spedizione. Questa tecnica è implementata nel TCP.
+                
+            \subsubsubsection{Segnalazione esplicita}
+                
+                Un nodo congestionato spedisce un segnale al mittente o al destinatario.
+                
+        \subsubsection{Gestione della finestra di congestione}
+        
+            I meccanismi per la gestione della \textbf{finestra di congestione} in TCP sono fondamentalmente tre: \textbf{avvio lento} (aumento moltiplicativo), \textbf{prevenzione della congestione} (aumento additivo) e \textbf{rilevamento della congestione} (diminuzione moltiplicativa).
+            
+            Se si vuole studiare questo argomento nel dettaglio, è caldamente consigliato il libro.
+            
+            \subsubsubsection{Avvio lento}
+            
+                Si parte con una finestra di congestione molto piccola. 
+                
+                La finestra di congestione viene raddoppiata ad ogni spedizione, se non ci sono problemi di trasmissione. La crescita esponenziale della finestra di congestione contrata con l'aggettivo \textit{lento} con cui si descrive questo metodo: tuttavia, questo metodo è effettivamente lento se confrontato con l'approccio che prevede una dimensione immediatamente moltro grande della finestra di congestione. 
+                
+                L'approccio dell'avvio lento viene detto aumento moltiplicativo in quanto la dimensione della finestra viene moltiplicata per un fattore di 2 in ogni aumento.
+                
+            \subsubsubsection{Prevenzione della congestione}
+            
+                L'avvio lento potrebbe in effetti causare congestione, dato che è di crescita esponenziale. Per ridurre il rischio di congestione, si utilizza una soglia oltre la quale questo raddoppio si ferma. 
+                
+                Il mittente dovrà mantenere una variabile detta "slow-start threshold" che rende lineare l'aumento della finestra di congestione.
+            
+            \subsubsubsection{Rilevamento della congestione}
+            
+                Quando si verifica una situazione di congestione, la dimensione della finestra di congestione dev'essere decrementata. 
+                
+                L'approccio utilizzato viene detto diminuzione moltiplicativa perché la finestra viene ridotta, come minimo, della metà del valore precedente. 
+                
+                Il mittente si rende conto di dover rallentare quando ha necessità di ritrasmettere un segmento, soprattutto se a causa dello scadere di un timeout.
+            
+        \subsubsection{Algoritmo RED}
+        
+            Si tratta di un algoritmo di prevenzione della congestione basato sull'eliminazione ragionata dei pacchetti, in virtù del fatto che gli effetti di una congestione critica sono più disastrosi di una congestione evitata. 
+            
+            Il TCP usa l'\textbf{algoritmo RED} (Random Early Detection) che controlla le code del router e, se il traffico è elevato, elimina dei pacchetti in modo casuale, con una certa probabilità pesata in base alla vicinanza con la congestione. Più pacchetti ci sono nella coda, più è alta la probabilità di eliminazione.
+            
+            Il problema principale dell'algoritmo RED è che, in caso di brevi \textbf{burst} di traffico, potrebbero essere comunque scartati dei pacchetti. Una soluzione potrebbe essere non considerare la quantità assoluta di pacchetti ma una media (\textbf{running average}) del numero di pacchetti in coda.
