@@ -190,14 +190,14 @@
                 \item
                     \textbf{Quantizzazione.} Si occupa di rappresentare le misurazioni in termini di \textit{valori}, ossia ricavare dalle misurazioni una quantificazione digitale in bit.
                     
-                    Innanzitutto si individua la differenza fra l'ampiezza minima e massima del segnale; dopodichè, si effettua una scelta progettuale: l'intervallo compreso fra l'ampiezza minima e massima del segnale viene diviso in $L$ intervalli d'ampiezza $\delta = \frac{(V_max - V_min)}{L}$. Ciascun intervallo viene rappresentato da un cosiddetto valore di quantizzazione compreso tra $0$ e $L-1$. Infine, ogni misura del campionamento viene approssimata al valore di quantizzazione del corrispondente intervallo.
+                    Innanzitutto si individua la differenza fra l'ampiezza minima e massima del segnale; dopodichè, si effettua una scelta progettuale: l'intervallo compreso fra l'ampiezza minima e massima del segnale viene diviso in $L$ intervalli d'ampiezza $\delta = \frac{(V_(max) - V_(min))}{L}$. Ciascun intervallo viene rappresentato da un cosiddetto valore di quantizzazione compreso tra $0$ e $L-1$. Infine, ogni misura del campionamento viene approssimata al valore di quantizzazione del corrispondente intervallo.
                 
                 \item
                     \textbf{Codifica.} Si trasformano i valori di quantizzazione in sequenze di bit. Poiché i valori sono compresi fra $0$ e $L-1$, è sufficiente usare la rappresentazione binaria del valore di quantizzazione. Il numero di bit necessari è $n_b = log_2 L$.
                     
                      La conversione digitale-digitale e analogico-digitale hanno in comune la fase di codifica, ossia l'impiego di un mezzo che richiede una rappresentazione digitale dei dati.
                     
-                    La velocità per rappresentare il segnale campionato è $Velocita' dei dati = f_s * n_b$
+                    La velocità per rappresentare il segnale campionato è $V = f_s * n_b$
             \end{itemize}
             
     \subsection{Conversione digitale-analogico}
