@@ -7,12 +7,12 @@
     
     \begin{itemize}
         \item
-            \textbf{ Sul nodo mittente}, lo strato di rete ha la responsabilità di creare un pacchetto con i dati in arrivo da un protocollo degli strati superiori. L'intestazione del pacchetto contiene, fra le altre cose, l'indirizzo logico del mittente e quello del destinatario. 
+            \textbf{Sul nodo mittente}, lo strato di rete ha la responsabilità di creare un pacchetto con i dati in arrivo da un protocollo degli strati superiori. L'intestazione del pacchetto contiene, fra le altre cose, l'indirizzo logico del mittente e quello del destinatario. 
             
             Lo strato di rete deve controllare la tavola di routing e trovare l'informazione necessaria, come ad esempio l'interfaccia di uscita sulla quale il pacchetto dev'essere spedito. Se il pacchetto è molto grande, lo si dovrà frammentare.
             
         \item
-            \textbf{ Sul router}, lo strato di rete ha la responsabilità di estrarre i dati dal pacchetto in arrivo (al fine di consultare la tavola di routing) e inoltrare il pacchetto verso la destinazione sull'interfaccia giusta. L'intestazione del pacchetto viene modificata.
+            \textbf{Sul router}, lo strato di rete ha la responsabilità di estrarre i dati dal pacchetto in arrivo (al fine di consultare la tavola di routing) e inoltrare il pacchetto verso la destinazione sull'interfaccia giusta. L'intestazione del pacchetto viene modificata.
                 
         \item
             \textbf{Sul nodo destinatario}, lo strato di rete ha la responsabilità di verificare l'indirizzo di destinazione del pacchetto in arrivo, cioè controllare che il pacchetto sia arrivato alla destinazione corretta. Se il pacchetto è frammentato, lo stato di rete attende la ricezione di ogni frammento, per poi riassemblare il pacchetto originale.

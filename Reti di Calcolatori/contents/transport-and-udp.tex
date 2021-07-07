@@ -177,7 +177,9 @@
         
         \begin{itemize}
             \item
-                \textbf{Lunghezza (16 bit).} Definisce la lunghezza totale del datagram, inclusi header e dati. Questo campo, in realtà, non è necessario, poiché il datagram IP in cui è incapsulato il datagram UDP conterrà - nella propria intestazione - la lunghezza di ambo i datagram.
+                \textbf{Lunghezza (16 bit).} Definisce la lunghezza totale del datagram, inclusi header e dati. Si potrebbe lecitamente pensare che questo campo non sia necessario, poiché il datagram IP (in cui è incapsulato il datagram UDP) conterrà - nella propria intestazione - la lunghezza di ambo i datagram. Tuttavia, ciò non è del tutto esatto.
+                
+                Nel mittente, ancora non abbiamo i dati forniti dall'intestazione del datagram IP (lo strato di trasporto viene prima dello strato di rete!), mentre nel destinatario abbiamo già "estratto" le informazioni dell'header IP, motivo per cui questo campo è in realtà necessario.
                 
             \item
                 \textbf{Numero di porta del mittente (16 bit).}
