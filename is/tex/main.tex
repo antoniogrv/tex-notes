@@ -1,0 +1,876 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\renewcommand{\contentsname}{Indice dei contenuti}
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}\mbox{}\\}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\title{Appunti ($G$) di Ingegneria del Software}
+
+\author{prof. A. De Lucia, dott. F. Pecorelli}
+
+\date{a.a. 2021/2022}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+    Questi appunti potrebbero essere incompleti o imprecisi.
+    
+    Maneggiare con cura.
+\end{center}
+
+\tableofcontents
+
+\section{Introduzione all'Ingegneria del Software}
+
+    In un \textbf{programma}, l’autore è anche l’utente; non è documentato, quasi mai è testato e non c’è un progetto dietro. In altre parole, non serve un approccio formale al suo sviluppo.
+    
+    Un \textbf{prodotto software}, invece, è usato da persone diverse da chi lo ha sviluppato. Si tratta di un prodotto industriale, il cui costo è circa 10 volte il costo del corrispondente programma, e richiede un approccio formale allo sviluppo. Si divide in generici e specifici. S’intende quindi l’insieme completo di programmi, procedure e documentazioni allegati.
+    
+    Il \textbf{software} non è solo il codice, ma anche tuti gli artefatti che lo accompagnano, dunque documentazione, casi di test, specifiche di progetto, manuali, etc.
+    
+    \vspace{3mm}
+    
+    I problemi che si possono incontrare nella produzione del software dipendono da vari fattori: costi, ritardi e abbandoni, affidabilità (malfunzionamenti). Lo scopo dell’Ingegneria del Software (IdS) riguarda la costruzione di software di grandi dimensioni, di notevole complessità e sviluppati in gruppo. Software sviluppati in questo modo hanno tipicamente versioni multiple. 
+    
+    Uno degli obiettivi principali dell’IdS è contestualizzare il software, poiché il software è tipicamente collocato all’interno di un sistema ibrido software/hardware. L’obiettivo finale è creare un sistema che rispetti i requisiti dell’utente. 
+    
+    \vspace{3mm}
+    
+    In generale, l’IdS si occupa dei metodi, metodologie, processi e strumenti per la gestione professionale del software. Si basa su principi quali rigore, formalità, separazioni di aspetti diversi, modularità, astrazione, anticipazione del cambiamento, generalità e incrementalità.
+    
+    \vspace{3mm}
+    
+    Un \textbf{metodo} è un procedimento generale per risolvere classi di problemi.
+    
+    \vspace{3mm}
+    
+    Una \textbf{metodologia} è l’insieme di principi, metodi ed elementi di cui una o più discipline si servono per garantire la correttezza e l’efficacia del lavoro.
+    
+    \vspace{3mm}
+    
+    Uno \textbf{strumento} è un artefatto o un sistema di supporto pratico allo sviluppo.
+    
+    \vspace{3mm}
+    
+    Una \textbf{procedura} è una combinazione di strumenti e metodi.
+    
+    \vspace{3mm}
+    
+    Un \textbf{paradigma} è un particolare approccio nel fare qualcosa.
+    
+    \vspace{3mm}
+    
+    Un \textbf{processo} è un particolare metodo per fare qualcosa, costituito da una sequenza di passi che coinvolgono attività, vincoli e risorse.
+    
+    \vspace{3mm}
+    
+    Un \textbf{processo di sviluppo software} è il processo mediante il quale le richieste dell’utente vengono tradotte in prodotto software.
+    
+    \vspace{3mm}
+    
+    Col \textbf{Forward Engineering} si crea il codice dal modello, usando una progettazione detta a Greenfield, cioè che parte da zero e può spaziare ovunque.
+    
+    \vspace{3mm}
+    
+    Col \textbf{Reverse Engineering} si crea il modello dal codice e la progettazione è detta a Interfacce o Re-ingegneristica. 
+    
+    \vspace{3mm}
+    
+    Col \textbf{Roundtrip Engineering} si realizza un misto delle prime due. Utile quando requisiti, etc., variano frequentemente.
+    
+    \vspace{3mm}
+    
+    I \textbf{componenti di un progetto} sono prodotto, schedule, partecipanti, task, definizioni del progetto formale o informale, tipo del progetto, dimensione, stati del progetto, tipo di comunicazione (pianificata o non), organizzazione della squadra (in team o gerarchie, con comitati di revisione, e ruoli).
+    
+            
+        
+        -	Sistema: collezione di sottosistemi che forniscono servizi.
+        -	Verifica: è l’equivalente del controllo tra la trasformazione tra due modelli. Validazione: si confronta un modello con la realtà, che potrebbe anche essere un sistema artificiale. Basata su principi di correttezza, completezza, consistenza, ambiguità, realismo.
+    
+    \vspace{3mm}
+    
+    Un \textbf{task} è un assegnamento ben definito di un lavoro per un ruolo. Gruppi di task sono detti attività. 
+    
+    \vspace{3mm}
+    
+    L’elemento tangibile, risultato di una task, è detto \textbf{work product}, soggetto a deadlines e suggerisce altre task. Ogni work product sviluppato per il cliente è detto deliverable, altrimenti sono detti internal work product. 
+    
+    Organizzazione task in funzione di schedule. Tutta la specifica di un lavoro attorno a una task è detta work package, organizzato in base alle schedule. Meccanismo di comunicazione sincrono/asincrono (segnali di fumo). Comunicazione event-driven (request for change, clarification, issue resolution) oppure schedulata (release, project review, walkthrough, status review).
+    
+    \vspace{3mm}
+    
+    Il \textbf{ciclo di vita del software} è il periodo di tempo che inizia quando il software viene concepito, e che termina quando il prodotto non è più disponibile per l’uso. 
+    
+    \vspace{3mm}
+    
+    Il \textbf{ciclo di sviluppo del software} è il periodo di tempo che inizi con la decisione di sviluppare un prodotto software e termina quando il prodotto è completato.
+
+\section{Modelli del ciclo di vita del software}
+
+    Un \textbf{modello del ciclo di vita del software} è una caratterizzazione descrittiva di come un sistema software dovrebbe essere sviluppato. Vari modelli: a cascata, a spirale, etc. Ad alto livello, un CVS consiste in definizione (si occupa del cosa – requisiti, funzioni, comportamenti del sistema), sviluppo (si occupa del come, cioè codice) e manutenzione.
+    
+    \subsection{Modello a cascata}
+    
+        Il \textbf{modello a cascata}, diventato popolare negli anni 70 grazie a Royce, è un modello sequenziale lineare, cioè con una progressione in cascata di fasi, senza ricicli per meglio controllare tempi e costi. Definisce e separa le varie fasi e attività (non c’è, o è minimo, overlap fra fasi). 
+        
+        Prevede elaborati intermedi da usare come input per le fasi successive. Ogni fase raccoglie attività omogenee per metodi e tecnologie, è caratterizzata da task e risultano in un deliverable; la fine di ogni fase è una milestone; i prodotti di una fase vengono congelati. 
+        
+        \vspace{3mm}
+        
+        Si declina nelle seguenti fasi:
+        
+        \begin{itemize}
+            \item \textbf{Studio di fattibilità.} Valutazione preliminare di costi e benefici. Output: documento di fattibilità.
+            
+            \item \textbf{Analisi dei requisiti.} Analisi completa dei bisogni dell’utente e del dominio del problema; descrive le funzionalità. Output: documento di specifica dei requisiti.
+            
+            \item \textbf{Progettazione.} Definizione di una struttura per il software, scomponendo il sistema in componenti e moduli. Output: documento di specifica del progetto.
+            
+            \item Programmazione, Unit Testing, Integrazione, System Testing, Deployment, Manutenzione, etc.
+        \end{itemize}
+    
+        Tra i pro del modello a cascata riconosciamo la facilità di comprensione e applicabilità. Di contro, l’interazione col committente è solo all’inizio e alla fine – non vi sono giudizi intermedi.
+        
+        \vspace{3mm}
+        
+        Una variante del modello a cascata è il modello VeV (Verification e Validation) (stiamo costruendo il prodotto nella giusta maniera? e Stiamo costruendo il prodotto giusto)? In questa variante, si possono inviare feedback alle fasi precedenti.
+    
+    \subsection{Modello a V}
+    
+        Nel modello a V, le attività di sinistra sono collegate a quelle di destra intorno alla codifica. Se si trova un errore in una fase a destra, si riesegue il pezzo collegato. Si può iterare migliorando requisiti, progetto, etc.
+     
+    \subsection{Modello a prototipi}
+     
+        Un \textbf{prototipo} aiuta a comprendere i requisiti o a valutare la fattibilità di un approccio. Si realizza una prima implementazione incompleta da considerare come prova. Il prototipo è un mezzo tramite il quale si interagisce col committente per accertarsi di aver ben compreso le sue richieste. 
+        
+        \vspace{3mm}
+        
+        Un \textbf{modello a prototipo} fa uso di mockup (produzione della UI), breadboards (implementazione di sottosistemi critici), e feedback. In generale, si definisce la prototipazione throw-away (lo sviluppo del prototipo parte dai requisiti meno compresi) ed esplorativa (lo sviluppo parte dai requisiti meglio compresi). Il prototipo è uno strumento di identificazione dei requisiti: dopo il suo utilizzo dev’essere gettato.
+    
+    \subsection{Modelli evolutivi, incrementali ed iterativi}
+    
+        Nello \textbf{sviluppo evolutivo}, si parte da una descrizione di massima e si sviluppa una prima versione, che viene migliorata e raffinata. Il problema è che alla fine il prodotto potrebbe essere scarsamente strutturato e si può avere perdita di visibilità del processo da parte del management. Utile per sistemi di taglia medio-piccola, o sistemi con un breve ciclo di vita.
+        
+        Nelle trasformazioni formali, ci si basa sulle trasformazioni di una specifica matematica in programmi eseguibili attraverso mutami che permettono di passare da uno stato ad un altro. Richiede skill specifiche. Difficoltà nelle specifiche formali. 
+        
+        \vspace{3mm}
+        
+        Il \textbf{modello di sviluppo a componenti} (riuso) prevede repository di componenti da poter riutilizzare a diversi livelli di astrazione. Utili nell’ambito dello sviluppo di software object-oriented.
+        
+        I requisiti sono spesso soggetti a modifiche nel corso dello sviluppo. Questo comporta iterazioni di rework, soprattutto nelle fasi iniziali. Tali iterazioni possono essere applicate a qualsiasi modello di processo di sviluppo. Due approcci fondamentali in tal senso sono lo Sviluppo incrementale e lo Sviluppo a spirale.
+        
+        \vspace{3mm}
+        
+        Lo \textbf{sviluppo incrementale} prevede che il software venga consegnato con più rilasci. Il sistema viene decomposto in sottosistemi (detti incrementi) che vengono implementati, testati, rilasciati, installati e posti in manutenzione secondo un piano di priorità in tempi diversi. 
+        
+        Diventa fondamentale la fase di integrazione di nuovi sottosistemi con quelli già in esercizio. Vantaggio dovuto alla possibilità di anticipare subito dei prodotti al committente, dunque minore rischio di fallimento. Testing più esaustivo. I modelli iterativi si basano su questa filosofia: ad ogni istante dopo il primo rilascio esiste un sistema versione N in esercizio, e un sistema N+1 in sviluppo. Ogni versione ha nuove funzionalità.
+
+        \vspace{3mm}
+    
+        Con il \textbf{modello a spirale}, si ha la formalizzazione del concetto di iterazione: il riciclo è fondamentale per questo modello. Il processo viene rappresentato come una spirale, piuttosto che come una sequenza di attività, e ogni giro della spirale rappresenta una fase del processo. Le fasi non sono predefinite, ma vengono scelte in accordo al tipo di prodotto e ognuna di esse prevede la scoperta, la valutazione e il trattamento esplicito dei rischi. 
+    
+        Si tratta di un meta-modello, cioè si possono usare più modelli. Ogni quarto della spirale prevede fasi di determinazione di obiettivi, valutazione di alternative, sviluppo, verifica e pianificazione. 
+    
+        \vspace{3mm}
+    
+        L’\textbf{extreme programming} è un approccio recente allo sviluppo software basato su iterazioni veloci che rilasciano piccoli incrementi delle funzionalità.
+
+\section{Sistemi e notazioni grafiche}
+
+    I diagrammi e le notazioni grafiche introdotte in questa sezione sono approfonditi in seguito.
+    
+    \vspace{3mm}
+
+    Un \textbf{sistema} è un insieme organizzato di parti comunicanti, ognuna delle quali è un sottosistema. 
+    
+    \vspace{3mm}
+    
+    Un \textbf{modello} è un’astrazione che descrive un sottoinsieme di un sistema. Una vista descrive particolari aspetti di un modello. 
+    
+    \vspace{3mm}
+    
+    Una \textbf{notazione} è un insieme di regole grafiche o testuali per descrivere viste. 
+    
+    \vspace{3mm}
+    
+    Un \textbf{fenomeno} è un oggetto nel mondo di un dominio che possiamo percepire. 
+    
+    \vspace{3mm}
+    
+    Un \textbf{concetto} descrive le proprietà dei fenomeni che sono comuni e sono 3-tuple (Nome, Obiettivo – proprietà che determinano se un fenomeno è un membro di un concetto, Membri – insieme dei fenomeni che sono parte del concetto).
+    
+    \vspace{3mm}
+    
+    Definiamo dunque l’\textbf{astrazione} come una classificazione di fenomeni in concetti e la modellazione come lo sviluppo di astrazioni per rispondere a necessità. Ad esempio, nella programmazione i “Tipi” sono astrazioni. Un membro di un Tipo è detto Istanza.
+    
+    \vspace{3mm}
+    
+    Il \textbf{Dominio Applicativo} è l’ambiente in cui opera il sistema. 
+    
+    \vspace{3mm}
+    
+    Il \textbf{Dominio delle Soluzioni} è l’insieme delle tecnologie disponibili per costruire il sistema (SDD, ODD).
+    
+    \vspace{3mm}
+    
+    L'UML (\textbf{Unified Modeling Language}) è uno standard per la modellazione del software orientato agli oggetti. 
+    
+    Il modello UML può essere visto gerarchicamente come un sistema diviso in uno o più modelli asua volta divisi in una o più viste. Lo scopo dei modelli UML è quello di semplificare l’astrazione di un progetto software e nascondere i dettagli non necessari alla comprensione della struttura generale. Prima di visionare i vari tipi di diagrammi, l'UML definisce alcune convenzioni. I nomi sottolineati delineano le istanze, mentre nomi non sottolineati denotano tipi (o classi), i diagrammi sono dei grafi, i nodi sono le entità e gli archi sono le interazioni tra di essi, gli attori rappresentano le entità esterne che interagiscono con il sistema. 
+    
+    Permette di costruire i seguenti diagrammi.
+
+    \subsection{Use Case Diagrams}
+    
+        I \textbf{Use Case Diagrams} descrivono le funzionalità del sistema dal punto di vista dell’utente. 
+        
+        \vspace{3mm}
+        
+        Sono usati durante la fase di raccolta dei requisiti per rappresentare il comportamento esterno. L’attore rappresenta i tipi di utenti del sistema, mentre i casi d’uso rappresentano una sequenza di interazioni per un tipo di funzionalità. 
+        
+        \vspace{3mm}
+        
+        Il \textbf{modello dei casi d’uso} è l’insieme di tutti i casi d’uso, ed è una completa descrizione delle funzionalità del sistema e del suo ambiente. Un attore, in particolare, modella un’entità esterna che comunica col sistema (es. utenti, sistemi esterni, etc). 
+        
+        \vspace{3mm}
+        
+        Un \textbf{caso d’uso}, dunque, rappresenta una classe di funzionalità fornite dal sistema mediante un flusso di eventi e consiste di un nome unico, attori partecipanti, condizioni di entrata e uscita, flusso di eventi e requisiti speciali.
+        
+        I casi d’uso possono estenderne altri aggiungendo eventi. 
+        
+        \vspace{3mm}
+        
+        La relazione \textit{extends} rappresenta casi invocati eccezionalmente o raramente (es. errori).
+        
+        La relazione \textit{includes} rappresenta il comportamento che è tratto dal caso d’uso per il riuso, non perché è un’eccezione. Serve a eliminare ridondanza.
+
+    \subsection{Class Diagrams}
+
+        I \textbf{Class Diagrams} descrivono la struttura statica del sistema (oggetti, attributi, associazioni).
+        
+        \vspace{3mm}
+        
+        Vengono usati durante l’analisi dei requisiti per modellare i concetti del dominio del problema; durante la progettazione del sistema per modellare sottosistemi e interfacce; durante l’object design per modellare le classi. Una classe rappresenta un concetto e incapsula stati e comportamenti. Ogni attributo ha un tipo, ogni operazione ha una signature. 
+        
+        \vspace{3mm}
+        
+        Definiamo la differenza fra attore, classe e istanza: un \textbf{attore} è un’entità esterna al sistema da modellare e che interagisce con esso. Una \textbf{classe} è un’astrazione che modella un’entità del dominio del problema e dev’essere modellata all’interno del problema. Un \textbf{oggetto} è una specifica \textbf{istanza} di una classe. 
+        
+        \vspace{3mm}
+        
+        Per indicare relazioni fra classi si usano le \textbf{associazioni} (mapping bidirezionale 1-a-1, n-a-1, etc) e link (connessione fra due oggetti). Ogni lato di un’associazione può essere etichettato con un ruolo dotato di nome (li si usa necessariamente per associazioni fra oggetti della stessa classe). Un’\textbf{aggregazione} è un caso speciale di associazione che denota una gerarchia di “\textit{consiste di}”. L’aggregato è la classe padre e le componenti sono le classi figlie. Forme forti di aggregazione sono dette \textbf{composizione}. 
+        
+        \vspace{3mm}
+        
+        Un \textbf{package} è un meccanismo UML per organizzare gli elementi in gruppi (package = sottosistema). 
+
+    \subsection{Sequence Diagrams}
+
+        I \textbf{Sequence Diagrams} descrivono il comportamento dinamico tra gli attori e il sistema, e tra gli oggetti e il sistema, mediante interazioni. Sono usati durante l’analisi dei requisiti per raffinare le descrizioni dei casi d’uso e trovare nuovi oggetti, e durante il system design per raffinare le interfacce dei sottosistemi. 
+        
+        Le classi sono rappresentate da colonne, i messaggi da frecce e le lifeline da linee verticali. La sorgente di una freccia indica l’attivazione che ha inviato il messaggio, che è lunga quanto tutte le attivazioni annidate. Le linee orizzontali indicano il flusso di dati. Le condizioni si esprimono nelle parentesi tonde. Si può esprimere la distruzione della vita utile di un oggetto con un marcatore.
+    
+    \subsection{State Chart Diagrams}
+
+        Gli \textbf{State Chart Diagrams} descrivono il comportamento dinamico di un oggetto individuale mediante stati e transazioni.
+        
+        \vspace{3mm}
+        
+        Gli \textbf{Activity Diagrams} modellano i comportamenti dinamici di un sistema, in particolare il suo workflow.
+        
+        È il caso speciale di uno State Chart Diagram in cui gli stati sono le attività. Tipi: \textit{Action State} (non decomponibile e rappresenta avvenimenti istantanei) e \textit{Activity State} (decomponibile ulteriormente e attività modellata da altro activity diagram). Con l’Activity Diagram si modellano le decisioni e la concorrenza (splitting del flusso di controllo in thread multipli).
+
+\section{Requirement Analysis Document}
+
+        Il \textbf{Problem Statement} è sviluppato dal cliente come una descrizione del problema che dovrebbe affrontare il sistema. Descrive la situazione corrente, le funzionalità che il sistema dovrebbe supportare, l’ambiente in cui il sistema sarà distribuito, le consegne attese dall’utente, le date di rilascio e criteri di accettazione. Contiene anche scenari, project schedule e target environnement (ambiente in cui il software sviluppato verrà sottoposto a system testing).
+
+        \vspace{3mm}
+
+        Tre modi di gestire complessità: \textbf{Astrazione}, \textbf{Decomposizione} (tecnica Divide et Impera, gestibile con ‘orientazione a oggetti’ e ‘decomposizione funzionale’, che comporta codice non mantenibile) e \textbf{Gerarchia} (tecnica Layering). Il primo passo nello stabilire i requisiti è identificare il sistema; si risponde a due domande: come posso identificare gli obiettivi del sistema e come possono distinguere i confini del sistema? 
+        
+        \vspace{3mm}
+        
+        Le risposte sono da cercarsi nel processo dei requisiti, che consiste di due attività: \textbf{Requirement Elicitation} (fase di raccolta dei requisiti), cioè definizione del sistema in termini comprensibili dal cliente; e \textbf{Requirement Analysis}, specifica tecnica del sistema in termini comprensibili agli sviluppatori.
+        
+        \vspace{3mm}
+        
+        L’output della fase di Requirement Elicitation è il documento di specifica dei requisiti, che usa un linguaggio naturale ed è derivato dal Problem Statement. Questo documento viene formalizzato per produrre il Modello di Analisi che usa notazioni formali, ad esempio UML. 
+
+        \vspace{3mm}
+
+        Durante la fase di \textit{Requirement Elicitation}, due metodi per raccogliere informazioni: Joint Application Design (JAD) – focalizza l’attenzione sull’ottenere un consenso fra sviluppatori, utenti e clienti; usato quindi in un contesto di stackholding con sviluppo partecipato – oppure Traceability, si pone l’attenzione sul registrare, strutturare, collegare e raggruppare le dipendenze tra i requisiti e gli altri work product. 
+        
+        \vspace{3mm}
+        
+        In sintesi, la fase di Requirements Elicitation serve a costruire un modello funzionale del sistema che sarà poi usato durante l’analisi dei requisiti per costruire un object model e un dynamic model. Le attività della Requirements Elicitation sono identificare gli attori, gli scenari, i casi d’uso, le relazioni fra questi, raffinare i casi d’uso, identificare requisiti non funzionali e gli oggetti partecipanti.
+
+    \subsection{Functional Modeling}
+        
+        I requisiti sono di tre tipi: \textbf{funzionali} (descrivono le interazioni tra il sistema e i suoi ambienti, indipendentemente dall’implementazione); \textbf{non funzionali} (descrivono aspetti del sistema non direttamente legati al suo comportamento funzionale) e \textbf{vincoli} (imposti dal cliente o dall’ambiente in cui si opera). I requisiti devono essere validati, e cioè essere corretti, completi, consistente, chiari, realistici, tracciabili e verificabili.
+        
+        \vspace{3mm}
+        
+        Gli \textbf{scenari} sono esempi di utilizzo del sistema in termini di sequenze di interazioni tra utente e sistema. I \textbf{casi d’uso} sono astrazioni che descrivono una classe di scenari.  Gli scenari sono una descrizione narrativa di cosa fanno le persone e mostrano come queste ultime provano ad usare l’applicazione e i sistemi computerizzati; sono descrizioni concrete e informali e coinvolgono, in genere, un singolo attore. Invece, i casi d’uso sono utili poiché modellano il sistema dal punto di vista dell’utente, risultando strumenti molto utili. 
+        
+        \vspace{3mm}
+        
+        Nella pratica, dopo aver definito uno scenario bisogna trovare un caso d’uso che specifica tutte le possibili istanze dell’operazione che descrive lo scenario. Il \textbf{Modello dei Casi d’Uso} è l’insieme di tutti i casi d’uso che specificano le complete funzionalità del sistema. 
+        
+        \vspace{3mm}
+        
+        I casi d’uso sono composti da nome, attori, entry ed exit condition, flusso di eventi, eccezioni, requisiti speciali (requisiti non funzionali/vincoli). Il Modello dei Casi d’Uso consiste nelle relazioni fra i casi d’uso, espresse tramite Dipendenze o Generalizzazioni. 
+        
+        \vspace{3mm}
+        
+        La \textbf{Generalizzazione} indica la situazione in cui un caso d’uso astratto ha differenti specializzazioni. Le Dipendenze si dividono in Inclusioni ed Estensioni. \textit{includes} realizza decomposizioni funzionali (funzione nel problem statement troppo complessa per essere risolta immediatamente) oppure riuso di funzionalità già esistenti; \textit{extends} realizza comportamenti comuni tra i casi d’uso e si vuole fattorizzarli usando un’associazione di generalizzazione; i casi d’uso figli ereditano il comportamento e il significato del caso d’uso padre e aggiungono ulteriori comportamenti.
+        
+        \vspace{3mm}
+        
+        \textit{[Non importante]} Il Modello FURPS è usato per suddividere in categorie i requisiti non funzionali (in usabilità, affidabilità, lealtà, performance, supportabilità, manutenibilità) e i vincoli, detti anche requisiti di qualità (di implementazione, di interfacce, di operazioni, di packaging, legali). 
+    
+    \subsection{Object Modeling}
+    
+        L'obiettivo principale dell’Object Modeling è trovare le astrazioni più importanti. Si identificano le classi (importante farlo bene e cioè entro i confini del sistema stabiliti dagli obiettivi del sistema), si trovano gli attributi, i metodi e le associazioni fra classi, iterando questo processo. Per identificare obiettivi del sistema, si usano scenari e casi d’uso. 
+        
+        \vspace{3mm}
+        
+        In generale, le componenti di un Object Model sono classi, relazioni, attributi e operazioni. Gli \textbf{Object Diagrams} sono una notazione grafica per modellare gli oggetti, classi e relazioni fra loro. Esempi di Object Diagram sono i \textbf{Class Diagrams} (utili per pattern, schemi) e \textbf{Instance Diagram} (utili per descrivere scenari). 
+        
+        \vspace{3mm}
+        
+        Identificare le classi è il punto focale della modellazione a oggetti. Per farlo vi sono vari approcci: approccio al \textit{dominio applicativo} (si richiede agli esperti del dominio di identificare le astrazioni più rilevanti); \textit{sintattico} (si parte dai casi d’uso e si vedono verbi/sostantivi tramite la \textbf{tecnica di Abbot}; \textit{design pattern}; \textit{sui componenti}.
+        
+        \vspace{3mm}
+        
+        Gl oggetti possono essere classificati come segue: \textbf{Entity} (rappresentano informazione persistente tracciata dal sistema), \textbf{Boundary} (interazione fra utente e sistema), \textbf{Control} (operazioni eseguite dal sistema). Nel MVC, il dominio applicativo è rappresentato dai Model object, visualizzato dai View object e manipolato dai Control object.
+        
+        \vspace{3mm}
+        
+        Dunque, i Class Diagrams hanno come obiettivo principale la descrizione delle proprietà statiche del sistema.
+    
+    \subsection{Dynamic Modeling}
+    
+        I diagrammi per la modellazione dinamica sono di due tipi: \textbf{Interaction Diagram}, che descrivono il comportamento dinamico tra gli oggetti, e si dividono in \textbf{Sequence Diagram} (che mostrano il comportamento dinamico di un insieme di oggetti organizzati in sequenze di tempo, utili per complessi scenari in real-time) e \textbf{Collaboration Diagram} (che mostrano le relazioni tra gli oggetti); e gli \textbf{Statechart Diagram} che, invece, sono macchine a stati che descrivono le risposte di un oggetto di una determinata classe agli stimoli percepiti dall’esterno (eventi). Un tipo speciale di questi diagrammi sono gli \textbf{Activity Diagram}, in cui ogni stato è uno di tipo \textit{action}. 
+        
+        \vspace{3mm}
+        
+        In generale, un \textbf{modello dinamico} è una collezione di più Statechart Diagrams, uno per ogni classe di comportamento dinamico rilevante. L’obiettivo di questo modello è quello di individuare e fornire metodi per il modello a oggetti. Per ottenerlo, si comincia dai casi d’uso o dagli scenari e si modellano le interazioni tra gli oggetti mediante i Sequence Diagrams, per poi modellare i comportamenti dinamici di ogni singolo oggetto mediante gli Statechart Diagram.
+        
+        \vspace{3mm}
+        
+        I \textbf{Sequence Diagrams} sono descrizioni grafiche degli oggetti che partecipano al caso d’uso o allo scenario, usando la notazione dei grafici aciclici direzionati. Un’euristica per ottenere un sequence diagram è basata sulle seguenti osservazioni: un evento ha sempre un trasmettitore e un ricevitore; la rappresentazione degli eventi è a volte chiamata messaggio; trovare questi eventi per ogni messaggio significa trovare gli oggetti partecipanti al loro caso d’uso. 
+
+        I Sequence Diagrams sono costruiti con un layout: la prima colonna dovrebbe corrispondere all’attore che ha iniziato il caso d’uso, la seconda ai \textit{Boundary Object} e la terza ai \textit{Control Object}; i \textit{Control Object} sono creati nella fase di inizializzazione di un caso d’uso, mentre i \textit{Boundary} sono creati dal control. 
+        
+        \vspace{3mm}
+        
+        I Boundary objects e i Control Objects accedono agli Entity Objects. I Sequence Diagrams possono essere strutturati come segue: \textbf{Fork Diagram} (i comportamenti dinamici in un singolo oggetto, in genere nel control object) e \textbf{Stair Diagram} (comportamento dinamico; ogni oggetto delega alcune responsabilità ad altri e ha solo poche informazioni sugli altri oggetti, ma sa quale di questi può aiutarlo in uno specifico comportamento).
+        
+        \vspace{3mm}
+        
+        Gli \textbf{Statechart Diagrams} possono essere mappati in una macchina a stati finiti. Si tratta di grafi in cui i nodi sono gli stati e gli archi direzionati sono transizioni etichettate dai nomi degli eventi. C’è sempre uno stato iniziale e uno finale. Una transazione rappresenta un cambio di stato a seguito di un evento. 
+        
+        Si determinano due tipi di operazioni in uno Statechart Diagram: \textit{attività}, cioè operazioni associate agli stati che richiedono tempo per essere completate, e \textit{azioni}, cioè operazioni istantanee e atomiche. 
+        
+        \vspace{3mm}
+        
+        Uno \textbf{stato} è l’astrazione degli attributi di una classe ed ha una durata. Insieme di \textit{sottostati} denotano un \textit{superstato}. Sono usati anche per \textbf{modellare la concorrenza}, che può essere \textit{di sistema} (ogni diagramma di stato è eseguito concorrentemente ad altri) e \textit{di oggetti} (stato dell’oggetto consiste in un insieme di stati, uno stato da ogni sottodiagramma). 
+        
+        \vspace{3mm}
+        
+        Riassumendo, gli Statechart Diagrams aiutano a identificare i cambiamenti in un oggetto individuale, mentre i Sequence Diagrams aiutano a identificare le relazioni temporali tra oggetti nel tempo e la sequenza delle operazioni come risposta a uno o più eventi.
+        
+    \subsection{Conclusioni}
+        
+        Il \textit{Requirement Analysis Document} risponde alle seguenti domande:
+        
+        \begin{itemize}
+            \item \textbf{Quali sono le trasformazioni?} Modellazione funzionale: creare scenari e casi d’uso parlando col cliente, osservando e facendo esperimenti.
+            
+            \item \textbf{Qual è la struttura del sistema?} Modellazione a oggetti: creare i Class Diagrams, dunque identificare classi, associazioni e molteplicità.
+            
+            \item \textbf{Qual è il suo comportamento?} Modellazione dinamica: creare i Sequence Diagrams, dunque mostrare la sequenza degli eventi scambiati tra gli oggetti, identificare dipendenze e concorrenza tra gli eventi, e creare Statechart Diagrams.
+        \end{itemize}
+
+\section{System Design Document}
+
+    \subsection{System Design Model}
+        Il \textbf{System Design} (progettazione del sistema) è la trasformazione del modello di analisi nel \textbf{System Design Model} (modello di progettazione del sistema). A differenza dell’Analisi, che si focalizza sul dominio applicativo, il System Design si focalizza sul dominio delle soluzioni. 
+        
+        \vspace{3mm}
+        
+        Lo scopo del System Design è quello di costruire un ponte fra il sistema desiderato e quello esistente usando la tecnica Divide and Conquer in maniera da modellare il sistema come un insieme di sottosistemi. 
+        
+        \vspace{3mm}
+        
+        Il System Design è costituito da una serie di attività: identificare gli obiettivi di design, progettazione la decomposizione del sistema in sottosistemi e raffinare quest’ultima per rispettare gli obiettivi di design. 
+        
+        \vspace{3mm}
+        
+        I prodotti del System Design sono obiettivi di design, architettura software e boundary use case. 
+        
+        \vspace{3mm}
+        
+        Gli obiettivi di design sono organizzati in cinque gruppi: criteri di performance, affidabilità, costo, mantenimento e di end user. Aspetto centrale: trade-off (es. funzionalità vs usabilità).
+        
+        \vspace{3mm}
+        
+        Un \textbf{sottosistema} (package in UML) è una collezione di classi, associazioni, operazioni, eventi e vincoli che sono in relazione tra loro. I servizi dei sottosistemi sono gruppi di operazioni fornite dai sottosistemi. Trovano origine dai casi d’uso dei sottosistemi e sono specificati dalle Interfacce dei sottosistemi. Queste interfacce dovrebbero essere piccole e ben definite, e sono spesso chiamate API. 
+        
+        \vspace{3mm}
+        
+        In generale, sono definiti i \textit{servizi} (insieme di operazioni correlate che condividono un obiettivo comune) e le \textit{interfacce} dei sottosistemi (insieme di operazioni correlate, con signature completamente specializzata).  Per ridurre la complessità di un sistema, lo si decompone in più sottosistemi.
+        Un \textit{oggetto di interfaccia di sistema} fornisce un servizio: si tratta di un insieme di metodi pubblici forniti dal sottosistemi e l’interfaccia del sottosistema descrive tutti i metodi dell’oggetto interfaccia del sottosistema.
+        
+        \vspace{3mm}
+        
+        Meccanismi come \textit{Coupling} e \textit{Cohesion} hanno l’obiettivo è ridurre la complessità mentre avvengono cambiamenti. La \textbf{Coesione} misura le dipendenze tra classi, quindi \textbf{Alta Coesione} significa che le classi nel sottosistema eseguono  task simili e sono in relazione con ogni altra classe mediante associazioni, mentre \textbf{Bassa Coesione} significa che la maggioranza delle classi songo ausiliare ed eterogenee con nessuna associazione. 
+        
+        \vspace{3mm}
+        
+        Il \textbf{Coupling}, invece, misura le dipendenze tra i sottosistemi.\textbf{ Alto Coupling} significa che i cambiamenti a un sottosistema avranno alto impatto sugli altri, mentre \textbf{Basso Coupling} significa che un cambiamento in un sottosistema non incide sugli altri.
+        
+        \vspace{3mm}
+        
+        Il \textbf{partizionamento} e la \textbf{stratificazione} sono tecniche usate per ottenere un basso coupling. Le partizioni dividono verticalmente un sistema in svariati sottosistemi indipendente (o debolmente accoppiati) che forniscono servizi allo stesso livello di astrazione. Uno strato è un sottosistema che fornisce servizi di sottosistema a uno strato più alto. Uno strato può dipendere solo da quelli più bassi e non ha conoscenza di quelli più alti.
+        
+        \vspace{3mm}
+        
+        Un esempio è dato dalla \textit{macchina virtuale}, cioè un’astrazione che fornisce un insieme di attributi e operazioni. Le macchine virtuali posono implementare due tipi di architetture software: aperta  (ogni strato può invocare operazioni a ogni strato inferiore, motivo per cui la stratificazione è detta trasparente – più efficiente) e chiusa (ogni strato può invocare solo operazioni allo strato immediatamente inferiore, motivo per cui la stratificazione è detta opaca – più portabile). 
+        
+        \vspace{3mm}
+        
+        I sistemi stratificati sono detti gerarchici.
+    
+        \subsection{Software Pattern}
+    
+        Alcuni pattern software che possono essere usati come base di architetture software, sono \textit{Client/Server}, \textit{Peer-to-Peer}, \textit{MVC}, \textit{Pipe e Filtri}, e \textit{Repository}.
+        
+        \begin{itemize}
+            \item \textbf{Stile Architetturale Client e Server.} Uno o più server forniscono servizi a istanze di altri sottosistemi detti client. I client chiamano il server che realizzare alcuni servizi e restituisce un risultato. Usata per sistemi basati su database, dove il front-end è l’applicazione utente e il back-end gestisce l’accesso e la manipolazione del database. Obiettivi di design per sistemi client e server sono portabilità, trasparenza, performance, scalabilità, flessibilità e affidabilità.
+            
+            \item \textbf{Stile Architetturale Peer-to-Peer}. Generalizzazione di client e server, dove i client possono essere server e viceversa. Complessa, possibilità di deadlock. Esempio di P2P è Modello OSI di ISO, dove vengono definiti i sette strati di rete (fisico…applicazione). Esistono poi middleware che implementano più strati del modello, in modo da permettere di focalizzare maggiormente sul livello di applicazione.
+            
+            \item \textbf{Stile Architeturale a Repository}. i sottosistemi accedono e modificano i dati in una singola struttura chiamata repository, e c’è basso coupling. Il flusso di controllo è detto repository centrale. I repository sono adatti per applicazioni con task di elaborazioni dati che cambiano frequentemente.
+            
+            \item \textbf{Stile Architetturale Model/View/Controller}. Sottosistemi di tre tipi differenti:
+            Model: mantiene la conoscenza del dominio applicativo; view: visualizza all’utente gli oggetti del dominio applicativo; controller: responsabile della sequenza di interazioni con l’utente e di notificare ai view i cambiamenti del modello. MVC caso speciale di architettura repository: il model implementa la struttura dati centrale, il controller gestisce escplicitamente il flusso di controllo (ottiene gli input e manda messaggi al modello) e il viewer visualizza il modello.
+            
+            \item \textbf{Stile Architetturale con Pipe e Filtri}. L'architettura UNIX si basa su questo stile. I filtri ricevono e inviano dati attraverso le loro pipe di input e output, ignorando l’esistenza e l’identità di ogni altro filtro.
+        
+        \end{itemize}
+    
+        \subsection{Attività del System Design}
+    
+            Quando si decompone il sistema, capita spesso di dover far fronte a determinate scelte che si presentano quando il sistema viene decomposto. Ognuna di queste ‘attività del System Design’ correggono la decomposizione del sistema, in modo da risolvere particolari problematiche. Una volta completate queste attività, possono essere definite le interfacce dei sottosistemi.
+            
+            \begin{itemize}
+                \item \textbf{Identificare la concorrenza.} In questa attività bisogna identificare i processi concorrenti. Un thread di controllo è un path attraverso un insieme di diagrammi di stato in cui, in ogni istante, un solo oggetto è attivo. Un thread rimane in un diagramma di stato fino a quando un oggetto invia un evento a un altro oggetto e attende un altro evento. 
+                
+                Quando un oggetto effettua un invio non bloccante di un evento, si utilizza un \textbf{Thread Splitting}. Due oggetti sono concorrenti se possono ricevere eventi nello stesso istante senza interagire. Questi due oggetti dovrebbero essere assegnati a thread di controllo differenti.
+                
+                \item \textbf{Mapping hardware/software.} “Qual è la connessione tra le unità fisiche? Protocollo di comunicazione? Qual è il tempo di risposta desiderato? Se l’architettura è distribuita, in questa attività di descrive al meglio l’architettura di rete, e quindi il sottosistema di comunicazione.
+                
+                Durante il System Design dobbiamo modellare la struttura statica e dinamica. A tal proposito, si utilizzare per le struture statiche i Component Diagram che mostrano la struttura al design time, o a al compile time, e per le strutture dinamiche i Demployment Diagram, che mostrano la struttura al runtime. 
+                
+                Un \textbf{Component Diagrams} è un grafo di componenti connesse mediante relazioni di dipendenza che mostra le dipendenze tra componenti software: codice sorgente, librerie, eseguibili.  
+                
+                I \textbf{Deployment Diagrams}, invece, sono utili per mostrare il progetto di un sistema dopo aver effettuato scelte in merito alla decomposizione a alla concorrenza.
+                
+                \item \textbf{Gestione dati persistenti.} Si sceglie il tipo di storaging. Un oggetto persistente può essere realizzato tramite strutture dati, file, database (Object-Oriented, relazionali).
+                
+                \item \textbf{Gestione risorse e sicurezza}. Durante l’analisi si modellano accessi differenti associando differenti casi d’uso a differenti attori. A seconda dei requisiti di sicurezza del sistema, possiamo anche definire il modo in cui gli attori vengono autenticati al sistema e come certi dovrebbero essere crittografati. 
+                
+                Gli accessi vengono modellati tramite una matrice di accesso: le righe rappresentano gli attori del sistema e le colone rappresentano le classi di cui vogliamo controllare l’accesso, stabilendo una correlazione chiamata diritto di accesso. Varie implementazioni di questa matrice: tabella globale degli accesso, lista di controllo degli accessi, capability (associamento coppia [classe, operazione] ad un attore).
+                
+                \item \textbf{Stabilire il controllo software}. Si stabilisce la modalità tramite la quale il sistema viene controllo. Può essere controllato implicitamente (linguaggi di chiarativi) o esplicitamente (linguaggi procedurali). Il controllo centralizzato può essere procedure-driven o event-driven. 
+                
+                Il controllo decentralizzato può far uso di vari oggetti indipendenti. Per stabilire quale tipo di controllo usato, si guardano i Sequence Diagrams: se hanno una struttura fork, si usa un controllo decentralizzato; in alternativa, se hanno una struttura stair, si utilizza un design decentralizzato.
+                
+                \item \textbf{Boundary Condition}. Si risponde a domande del tipo come si avvia il sistema? I singoli sottosistemi possono terminare? Come si comporta il sistema quando un nodo fallisce?
+            \end{itemize}
+
+    \subsection{Revisione del System Design}
+    
+        Come l'analisi dei requisiti, il System Design è un'attività evolutiva ed iterativa. A differenza dell'analisi, però, non ci sono agenti esterni, come il cliente, a revisionare le successive iterazioni. 
+        
+        Dunque, ci si pone il problema di come revisionare il System Design, assicurandosi che sia corretto (se il modello di analisi può essere mappato su di esso), completo (se ogni requisito è stato perseguito), consistente (se non contiene contraddizioni), realistico (se il sistema può essere implementato) e leggibile (se gli sviluppatori possono comprenderlo).
+        
+        \vspace{3mm}
+        
+        Inoltre, si tenga noto che il System Design nasce attraverso successive \textbf{iterazioni} e cambiamenti. I cambiamenti sono controllati per prevenire il caos, specialmente il progetti complessi. Vi sono tre tipi di iterazioni: decisioni importanti che incidono sulla decomposizione in sottosistemi; revisioni delle interfacce dei sottosistemi per valutare specifici problemi; errori e sviste scoperti tardi.
+    
+\section{Object Design Document}
+    L'\textbf{Object Design} è il processo che si occupa di aggiungere dettagli all'analisi dei requisiti e di prendere decisioni di implementazione. L'object designer deve scegliere diversi tra diversi modi di implementare il modello di analisi.
+    
+    \vspace{3mm}
+    
+    Nell'analisi dei requisiti, i casi d'uso, il modello funzionale e quello dinamico definiscono le operazioni per il modello a oggetti. Nell'Object Design, iteriamo nel processo di assegnazione di queste operazioni per il modello a oggetti. In altre parole, l'Object Design serve come base per l'implementazione e durante il suo sviluppo chiude il gap tra gli oggetti di applicazioni e le componenti off-the-shelf, identificando oggetti soluzione e raffinando gli oggetti esistenti.
+    
+    \vspace{3mm}
+    
+    Le principali attività dell'Object Design sono applicare i concetti di riuso, specificare le interfacce dei servizi, ristrutturazione del modello a oggetti e sua ottimizzazione. Queste attività di solito non sono sequenziali, ma realizzate in maniera concorrente.
+    
+    \vspace{3mm}
+    
+    Le attività più difficile nello sviluppo di un sistema sono l'identificazione degli oggetti e la decomposizione del sistema in oggetti. L'analisi dei requisiti è concentrata sul dominio applicativo; il System Design è concentrato sia sul dominio applicativo che implementativo; infine, l'Object Design si focalizza sul dominio implementativo.
+    
+    \vspace{3mm}
+    
+    \textit{Durante l'analisi dei requisiti}, le tenciche per trovare gli oggetti si basano sui casi d'uso e gli oggetti partecipanti, per poi fare una sorta di analisi testuale del flusso di eventi.
+    
+    \textit{Durante lil System Design}, le tecniche per trovare gli oggetti si basano sulla decomposizione in sottosistemi e sul tentativo di identificare strati e partizioni. 
+    
+    \textit{Durante l'Object Design}, le tecniche per trovare gli oggetti sono incentrate sulla ricerca degli oggetti addizionali, applicando le conoscenze del dominio implementativo.
+    
+    \vspace{3mm}
+    
+    Gli \textbf{Application Object}, detti anche Domain Object, rappresentano concetti del dominio che sono rilevanti per il sistema. I \textbf{Solution Object}, invece, rappresentano concetti che non hanno una controparte nel dominio applicativo.
+    
+    \vspace{3mm}
+    
+    Ricapitolando, durante l'analisi identifichiamo gli entity object e le loro relazioni, attributi e operazioni. Identifichiamo anche solution object visibili all'utente, come i boundary e i control object. Durante il system Design, invece, identifichiamo altri solution object in termini di piattaforme hardware e software. Durante l'object design, raffiniamo e dettagliamo tutti questi application e solutiono object, e identifichiamo ulteriori solution object per chiudere il gap di object design.
+    
+    \subsection{Design Pattern}
+    
+        Un'ulteriore sorgente per trovare gli oggetti sono i \textbf{Design Pattern}: quest'ultimi descrivono un problema ricorrente nel nostro ambiente, e il cuore della soluzione a tale problema, in modo tale da poter usare questa soluzione ancora un milione di volte, senza mai doverla ricercare.
+        
+        \vspace{3mm}
+        
+        Ricordiamo che, in generale, l'\textbf{Ereditarietà} è usata per raggiungere due differenti obiettivi: descrivere le tassonomie e specificare le interfacce. 
+        
+        \vspace{3mm}
+        
+        Nel caso dell'Object Design, e in particolare nel caso in cui si vuole aumentare il riuso, si applica la Composizione (\textbf{Black Box Reuse}), per la quale la nuove funzionalità è ottenuta mediante aggregazione; oppure l'Ereditarietà (\textbf{White Box Reuse}), per la quale la nuova funzionalità è ottenuta mediante ereditarietà. Ha come vantaggi la chiarezza d'uso e la semplicità di implementare nuove funzionalità; di contro ha la dipendenza rispetto alla classe padre.
+        
+        \vspace{3mm}
+        
+        Con \textit{ereditarietà di interfaccia}, detta anche subtyping, si ereditano da una classe tutte le operazioni specificate, ma non ancora implementate.
+        
+        Con \textit{ereditarietà implementativa}, o di classe, si ha l'obiettivo di estendere le funzionalità dell'applicazione mediante il riuso di funzionalità nella classe padre.
+        
+        \vspace{3mm}
+        
+        La \textbf{Delegazione}, infine, è un modo di fare composizione in maniera potente per il riuso. Sono coinvolti due oggetti nella gestione di una richiesta: un oggetti ricevente delega operazioni al suo delegato: Lo sviluppatore può essere sicuro che l'oggetto ricevente non permette al client di usare impropriamente l'oggetto delegato. Ha come vantaggio la flessibilità, ma di contro l'inefficienza. 
+        
+        \vspace{3mm}
+        
+        Le migliori euristiche di design indicano le seguenti regole: mai usare l'ereditarietà implementativa, ma quella di interfaccia, e se si vuole usare la prima piuttosto usare la delegazione; una sottoclasse non dovrebbe mai nascondere le operazioni implementate in una superclasse.
+        
+        \subsubsection{Composite Pattern}
+            
+            Il \textbf{Composite Pattern} compone gli oggetti in una struttura ad albero, per rappresentare intere parti di gerarchie con profondità e altezze arbitrarie. Con i Composite Pattern si può modellare anche lo sviluppo software. In particolare, si può modellare il ciclo di vita del software come insieme di attività di sviluppo o collezioni di task.
+            
+            \vspace{6mm}
+                    
+            Un sottosistema consiste di un oggetto interfaccia (Entity Object), di un insieme di oggetti del dominio applicativo che modellano entità reali o sistemi esistenti, e uno o più Control Object. La realizzazione delle interfacce avviene mediante i Facade, la realizzazione dei sistemi esisteni tramite Adapter o Bridge.
+                
+        \subsubsection{Facade Pattern}
+                
+            I \textbf{Facade Pattern} forniscono un'interfaccia unificata per un insieme di oggetti in un sottosistema. Un facade definisce un'interfaccia di livello più alto che rende il sottosistem più semplice da usare e permettere di costruire architetture chiuse. In un'architettura aperta, ogni client ha visione dell'interno del sottosistema e può chiamare tutte le operazioni delle componenti o delle classi che vuole. 
+            
+            \vspace{3mm}
+            
+            Il sistema è efficiente, ma non ci si può aspettare che il chiamante sappia come lavorare col sottosistema, dando luogo a codice non portabile. Si può quindi realizzare un'architettura chiusa con un Facade: il sottosistema, in questo caso, decide esattamente come essere acceduto, affidando l'integrazione ad un driver.
+              
+        \subsubsection{Adapter Pattern}
+                
+            Gli \textbf{Adapter Pattern} convertono le interfacce di classe in altre interfacce, che i client si aspettano. Adapter permette di far lavorare insieme classi che altrimenti non potrebbero, a causa di incompatibilità. Viene usato per fornire una nuova interfaccia a componenti legacy ed è anche detto Wrapper. Si distinguono in due tipi: Class Adapter, che sfrutta l'ereditarietà multipla, e l'Object Adapter, che sfrutta ereditarietà singola e delegazioni.
+                
+        \subsubsection{Bridge Pattern}
+                
+            Il \textbf{Bridge Pattern} permette a differenti implementazioni di un'interfaccia di essere decise dinamicamente. E' usato per fornire implementazioni multiple sotto la stessa interfaccia. Il Bridge, dunque, separa un'astrazione dalla sua implementazione, in modo che le due possano variare indipendentemente.
+                
+        \subsubsection{Strategy Pattern}
+        
+            Consideriamo una situazione in cui ci sono delle scelte (strategie) da effettuare in base ad una situazione corrente (es il livello di traffico su una rete). Questo pattern fornisce l’abilità di funzionamento al sistema anche in situazioni che modificano a runtime (dovute a cambiamenti dell’ambiente).
+            
+            \vspace{6mm}
+            
+            Il pattern coinvolge una classe Policy che si occupa di identificare i cambiamenti nell’ambiente, una classe Stategy che si occupa di fornire un interfaccia generica verso le attuali e future implementazioni del servizio e una classe Context che viene opportunamente configurata dal Policy. In questo pattern la classe Policy seleziona la strategia concreta da utilizzare e la configura sul Context, scegliendola in base alla situazione attuale.
+            
+            A prima vista potrebbe sembrare simile al bridge pattern ma in questo caso l’ambiente esterno cambia a runtime.
+            
+        \subsubsection{Abstract Factory Pattern}
+        
+            In una situazione in cui un unico sistema deve interagire con delle componenti esterne sviluppate da diversi produttori  non è facile ottenere l’interoperabilità delle componenti con il sistema in quanto ogni componente/produttore offrono le stesse funzionalità (es regolazione temperatura o spegnimento) ma con delle interfacce differenti. 
+            
+            In una situazione simile è possibile usare l’abstract factory pattern in cui sono presenti più factory (una per ogni casa produttrice), una classe astratta per ogni tipo di prodotto  e una implementazione di tale classe per ogni prodotto concreto. Tutte le factory presenti in realtà implementano una interfaccia comune AbstractFactory che permette loro un comportamento standard. L’applicazione (Client) in questo modo può usare, oltre ad un interfaccia standard per accedere alle factory, anche un interfaccia generica per usare i prodotti.
+            
+        \subsubsection{Command Pattern}
+        
+            In sistemi interattivi spesso si vuole che delle azioni siano registrabili, annullabili o rieseguibili. Supponiamo che esistano più tipi di azioni (es. annulla digitazione; annulla cancellazione; ripeti cancellazione ecc). Se vogliamo che un applicazione usi in modo standard le operazioni eseguibili su queste operazioni possiamo creare una interfaccia generica Command che viene implementata dai comandi concreti. Tutte le operazioni vengono registrate all’interno di un Invoker ed eseguite su un Receiver.
+                
+        \subsubsection{Proxy Pattern}
+            
+            La creazione e l'inizializzazione di oggetti sono due attività molto costose. Il \textbf{Proxy Pattern} riduce il costo di accesso agli oggetti, usando un altro oggetto, il Proxy, che fa le veci dell'oggetto reale. Il proxy crea l'oggetto reale solo quando l'utente lo richiede. 
+                    
+            \vspace{3mm}
+            
+            Possono essere distinti in \textit{proxy remoti} (i proxy sono rappresentativi di oggetti in differenti spazi locali, utile per il caching), \textit{proxy virtuali} (i proxy fanno le veci di oggetti troppo costosi da scaricare) e\textit{ proxy di protezione} (forniscono accesso controllato a oggetti reali, utile quando differenti oggetti hanno differenti diritti di visioni di un documento).
+                
+            \vspace{3mm}
+                
+            Adapter, Brdige, Facade e Proxy sono variazioni di un singolo tema: riducono l'accoppiamento tra due o più classi, introducono una classe astratta per permettere estensioni future e incapsulano strutture complesse.
+        
+    \subsection{Object Constraint Language}
+        La seconda fase dell’object design è la specifica delle interfacce. L’obiettivo di questa fase è quello di produrre un modello che integri tutte le informazioni in modo coerente e preciso. Questa fase è composta dalle seguenti attività:
+    
+        \begin{itemize}
+            \item Identificare gli attributi
+            
+            \item Specificare le firme e la visibilità di ogni operazione
+            
+            \item Specificare le precondizioni
+            
+            \item Specificare le postcondizioni
+            
+            \item Specificare le invarianti 
+        \end{itemize}
+    
+        La firma di un metodo è la specifica completa dei tipi di parametri che un metodo prende in input e di quelli presi in output. La visibilità di un metodo può essere di tre tipi: Private, Protected, Public. In UML questi tre tipi di rappresentano rispettivamente con i simboli - (cancelletto) + fatti precedere alla firma del metodo o di un attributo. Nel progettare le interfacce di classe bisogna valutare bene quali sono le informazioni da rendere pubbliche. 
+        
+        \vspace{3mm}
+        
+        Come regola bisognerebbe esporre in modo pubblico solo le informazioni strettamente necessarie. Spesso l’informazione sul tipo di un attributo o parametro non bastano a restringere il range di valori di quell’attributo. Ai class user, implementor ed extendor serve condividere le stesse assunzioni sulle restrizioni. I contratti possono essere di tre tipi:
+        
+        \begin{itemize}
+            \item \textbf{Invariante.} E’ un predicato che è sempre vero per tutte le istanze di una classe.
+            
+            \item \textbf{Precondizione.} Sono predicati associati ad una specifica operazione e deve essere vera prima che l’operazione sia invocata. Servono a specificare i vincoli che un chiamante deve rispettare prima di chiamare un operazione.
+            
+            \item \textbf{Postcondizione.} Sono predicati associati ad una specifica operazione e devono essere soddisfati dopo che l’operazione è stata eseguita. Sono usati per specificare vincoli che l’oggetto deve assicurare dopo l’invocazione dell’operazione.
+        \end{itemize}
+        
+        Per esprimere contratti in modo più formale è possibile usare l’OCL. In OCL un contratto è una espressione che ritorna un valore booleano vero quando il contratto è soddisfatto. Le espressioni hanno tutte questo template: context NomeClasse::firmaMetodo() tipoContratto: espressione. 
+        
+        \vspace{3mm}
+        
+        Per esprimere un contratto di classe e non di metodo si può omettere la firma del metodo e il doppio due punti dal template sopra (es. context NomeClasse pre: nomeAttributo = 0). 
+        
+        Nell’espressione è possibile usare nomi di metodi.
+        
+        Nelle espressioni di postcondizione è possibile indicare il valore restituito da un’operazione o il valore di un attributo prima della chiamata del metodo usando @pre.nomeMetodo() oppure @pre.nomeAttributo (es. context Hashtable::put(key,value) post: getSize() = @pre.getSize() + 1). 
+        
+        E’ possibile esprimere vincoli che coinvolgono più di una classe mettendo una freccia verso la classe che fa parte dell’espressione. OCL così come è stato descritto non permette espressioni che coinvolgono collezioni di oggetti. OCL mette a disposizione tre tipi di collezioni: 
+        
+        \begin{itemize}
+            \item \textbf{Sets.} Insieme non ordinato di oggetti esprimibile con la forma {elemento1, elemento2, elemento3}
+            
+            \item \textbf{Sequence.} Insieme ordinato di oggetti esprimibile con la forma [elemento1, elemento2, elemento3]
+            
+            \item \textbf{Bags.} Insiemi multipli di oggetti. La differenza con Sets è che gli oggetti possono essere presenti più volte o l’insieme può essere vuoto. (es. {elemento1, elemento2, elemento2, elemento3}. 
+            
+            Per accedere alle collezioni OCL fornisce delle operazioni standard usabili con la sintassi collezione->operazione(). Le più usate sono, ad esempio, \textit{size, includes, select}.
+        \end{itemize}
+        
+\section{Testing}
+    
+    Il \textbf{Testing} consiste nel trovare le differenza tra il comportamento atteso e il comportamento osservato dal sistema implementato.
+    
+    \vspace{3mm}
+    
+    Questa attività, chiaramente, va in contrasto con tutte le attività svolte in precedenza: analisi, design e implementazione sono attività costruttive, mentre il testing tenta di "\textit{rompere il sistema}". Per questo motivo, dovrebbe essere realizzato da sviluppatori che non sono stati coinvolti nelle attività di costruzione del sistema stesso.
+    
+    \vspace{3mm}
+    
+    I termini maggiormente utilizzati in questo contesto sono \textbf{affidabilità} (misura di successo del testing), \textbf{failure} (deviazione del comportamento), \textbf{stato di errore} (il sistema è in uno stato tale che ogni ulteriore elaborazione porterà ad un failure), e \textbf{fault} (causa meccanica/algoritmica di uno stato di errore).
+
+    \vspace{3mm}
+    
+    Definiamo il \textit{testing} come la creazione di failure in maniera pianificata, il \textit{debugging} come 'la ricerca di errori quando capitano failure non pianificati, e il\textit{ monitoraggio} come la distribuzione di informazioni sullo stato per cercare bug.
+    
+    \vspace{3mm}
+    
+    In generale, per trattare gli errori si utilizzano i seguenti approcci:
+    
+    \begin{itemize}
+        \item \textbf{Error Prevention}, prima di rilasciare il sistema, usando buone metodologie di programmazione, prevenendo quindi incosistenze e bug.
+        \item \textbf{Error Detection}, mentre il sistema è in esecuzione tramite testing, debugging e monitoraggio.
+        \item \textbf{Error Recovery}, recuperando da un failure una volta che il sistema è stato rilasciato.
+    \end{itemize}
+
+    Un \textbf{Componente} è una parte del sistema che può essere isolata per essere testata. Su un componente, si usano i Test Driver e i Test Stub. 
+    
+    \vspace{3mm}
+    
+    I \textbf{Test Stub} è un'implementazione parziale di una componente da cui dipende la componente testata (in pratica, simula le componenti chiamate dalla componente testata). 
+    
+    \vspace{3mm}
+    
+    Un \textbf{Test Driver} è un'implementazione parziale di una componente che dipende dalla componente testata (in pratica, simula il chiamante della componente testata). Il bisogno di driver e stub dipende dalla posizione della componente da testare nel sistema.
+    
+    \vspace{3mm}
+    
+    L'\textbf{oracolo} conosce l'output atteso, per input alla componente, da confrontare con l'output reale per identificare le failure. Una volta che i test sono stati eseguiti e i fallimenti rilevati, gli sviluppano alterano il componente per eliminare il falliumento.
+    
+    Una \textbf{correzione} è un cambiamento apportato a un componente.  Chiaramente, una correzione potrebbe introdurre nuovi fault, e per questo si utilizzano delle tecniche per gestire questi difetti, come il \textbf{Testing di Regressione}, definito come la riesecuzione di tutti i test effettuati precedentemente.
+    
+    \vspace{3mm}
+    
+    Il \textit{test dei componenti} può essere effettuato mediante i seguenti approcci:
+    
+    \begin{itemize}
+        \item \textbf{Unit Testing}, con l'obiettivo di confermare che il sottosistema sia codificato correttamente e che esegua le funzionalità attese.
+        
+        \item \textbf{Integration Testing}, con l'obiettivo di testare le interfacce tra i sottosistemi.
+    \end{itemize}
+    
+    Il \textit{test del sistema} viene effettuato mediante i seguenti approcci:
+    
+    \begin{itemize}
+        \item \textbf{System Testing}, con l'obiettivo di determinare se il sistema rispecchia i requisiti funzionali e globali.
+        
+        \item \textbf{Acceptance Testing}, con l'obiettivo di dimostrare se il sistema rispecchi i requisiti del cliente e che è pronto all'uso.
+    \end{itemize}
+    
+    Per pianificare le attività di testing, si utilizzano i seguenti documenti:
+    
+    \begin{itemize}
+        \item \textbf{Test Plan}, ci si focalizza sugli aspetti manageriali del testing, documentando gli scopi, le risorse e lo schedule delle attività di testing.
+        
+        \item \textbf{Test Case Specification}, in cui si documenta ogni test, funzionalmente agli input, driver, stub e output attesi, come i task che devono essere eseguiti.
+        
+        \item \textbf{Test Incident Report}, in cui si documenta ogni esecuzione, in particolare i risultati reali dei test e le differenze dagli output attesi.
+        
+        \item \textbf{Test Summary Report}, in sui si elencano tutte i failure rilevate durate i test che devono essere investigati.
+    \end{itemize}        
+    
+    \subsection{Unit Testing}
+    
+            L'\textbf{Unit Testing} può essere eseguito in maniera informale, mediante la codifica incrementale oppure mediante analisi statiche o dinamiche. 
+            
+            L'\textbf{analisi statica} avviene mediante: esecuzione manuale, leggendo il codice sorgente; walkthrough; ispirazione del codice; tool automatici.
+            
+            L'\textbf{analisi dinamica}, invece, avviene mediante Black-Box Testing (per testare i componenti di input e output) e White-Box Testing (per testare la logica interna del sottosistema o dell'oggetto) e il Testing basato sulle strutture dati (i tipi di dati determinano i casi di test).
+            
+            \vspace{3mm}
+            
+            Altri tipi di testing non indicati di seguito sono il \textit{Worst Case Testing} e il \textit{Boundary Value Testing}.
+        
+        \subsubsection{Black-Box Testing}
+        
+            Il \textbf{Black-Box Testing} si focalizza sul comportamento I/O, senza preoccuparsi della struttura interna del componente. Se per ogni dato input, siamo in grado di prevedere l'output, allora il modulo supera il test. 
+            
+            Tuttavia, è quasi sempre impossibile generare tutti i possibili input, cioè i test case. L'obiettivo diventa, quindi, quello di ridurre il numero di casi di test effettuando un partizionamento: si dividono le condizioni di input in classi di equivalenza e si scelgono i test case per ogni classe di equivalenza.
+            
+            \vspace{3mm}
+            
+            Per selezionare questi classi, non ci sono regole bensì linee guida: se l'input è valido per un range di valori, si scelgono i test case su classi sotto il range, dentro il range e sopra il range; se l'input è valido solo se appartiene ad un insieme discreto, si scelgono i test case su classi di valori discreti validi e non validi.
+            
+            \vspace{3mm}
+            
+            Un'altra soluzione per scegliere solo un numero limitato di test case è giungere a conoscenza dei comportamenti interi delle unità da testare: questo è il sunto del \textbf{White-Box Testing}.
+            
+            \vspace{3mm}
+            
+            Sia Black-Box che White-Box sono sistematici, quindi non randomici. 
+        
+        \subsubsection{White-Box Testing}
+        
+            Il \textbf{White-Box Testing} si focalizza sulla completezza (intesa come copertura). Ogni statement nella componente è eseguita almeno una volta. Indipendentemente dall'input, ogni stato nel modello dinamico dell'oggeto e ogni interazione tra gli oggetti viene testata. 
+            
+            \vspace{3mm}
+            
+            Esistono quattro tipi di White-Box Testing: lo \textit{Statement Testing} (testing algebrico, in cui si testano i singoli statement); il \textit{Loop Testing} (che provoca l'esecuzione del loop che dev'essere saltato completamente); il \textit{Path Testing} (si assicura che tutti i path nel programma siano eseguiti); e il \textit{Branch Testing} (testing condizionale; assicura che ogni possibile uscita da una condizione sia testata almeno una volta).
+            
+            \vspace{3mm}
+            
+            Potenzialmente, un numero infinito di cammini dovrebbero essere testati. Il White-Box Testing spesso testa ciò che è stato fatto, invece di ciò che dovrebbe essere fatto. Tuttavia, non individua i casi d'uso mancanti. Il Black-Box Testing, invece, ha la peculiarità di essere una potenziale esplosione combinatoria di casi di test. Spesso, però, non è chiaro se i casi di test selezionati scoprono particolari errori o meno, e non casi d'usi estranei.
+        
+        \subsubsection{Equivalence Class Testing}
+        
+            L'\textbf{Equivalence Class Testing} nasce dalla motivazione di cercare di avere un testing completo e con la speranza di evitare ridondanze. Le classi di equivalenza sono partizioni dell'input set. 
+            
+            L'intero input set viene coperto, ottenendo la completezza, e le classi sono disgiunte, evitando ridondanza. I test case sono elementi di ogni classe di equivalenza. 
+            
+            Il rpoblema è che le classi di equivalenza devono essere scelte saggiamente, cioè in base ai comportamenti più probabili.
+        
+            \vspace{3mm}
+            
+            Il \textbf{Weak Equivalence Class Testing} sceglie una variabile valore da ogni classe di equivalenza; lo \textbf{Strong Equivalance Class Testing}, basato sul prodotto cartesiano degli insieme di partizione e sull'assunzione che le variabili siano indipendenti, testa tutte le interazioni tra le classi. 
+            
+            Se le condizioni di errore hanno alta priorità, dovremmo estendere lo Strong Equivalence Class Testing per includere le classi non valide.
+            
+            \vspace{3mm}
+            
+            In generale, l'Equivalence Class Testing è appropiato quando i dati in input sono definiti in termini di range e insiemi di valori discreti.
+            
+    \subsection{Integration Testing}
+        
+        Il \textbf{Test di Integrazione} rileva bug che non sono stati determinati durante il Test di Unità, focalizzando l'attenzione su un insieme di componenti che vengono integrati. 
+        
+        Due o più componenti vengono integrati e analizzati, e quando dei bug sono rilevati si possono aggiungere nuovi componenti per risolverli. 
+        
+        L'intero sistema viene dunque visto come una collezione di sottosistemi determinati durante il System Design e l'Object Design. 
+        L'ordine in cui i sottosistemi vengono selezionati per il testing e per l'integrazione determina le strategie di testing.
+        
+        \vspace{3mm}
+        
+        L'obiettivo primario del testing di integrazione è, dunque, quello di identificare errori nella configurazione dei componenti.
+        
+        \begin{itemize}
+            \item \textit{Big-Bang Testing.} Le componenti vengono prima testate individualmente e poi insieme, come un unico sistema. Sebbene sia semplice, è costoso.
+            
+            \item \textit{Bottom-Up Testing.} I sottosistemia l livello più basso della gerarchia sono testati individualmente. I successivi sottosistemi ad essere testati sono quelli che chiamano i sottosistemi testati in precedenza. 
+            
+            Si ripete quest'ultimo passo finché tutti i sottosistemi non sono testati. L'approccio bottom-up è orientato a metodologie di design object-oriented.
+            
+            \item \textit{Top-Down Testing.} Si testano prima i livelli al top e, successivamente, si combinano tutti i sottosistemi che sono chiamati da quelli già testati e si testa la risultante combinazione di sottosistemi. 
+            
+            Si ripete il processo fino a quando tutti i sottosistemi non sono incorporati nel test. L'approccio Top-Down prevede impone che i test case siano definiti in funzioni esaminate e richiede di mantenere la corretteza dei test stub, la cui scrittura può essere però difficoltosa.
+            
+            \item \textit{Sandwich Testing.} Si combina l'uso di strategie top-down e bottom-up. Il sistema è visto come se avesse tre strati: un livello di target nel mezzo, uno sopra il target e uno sotto il target. 
+            
+            Chiaramente, il testing converge al target. Il vantaggio principale è che i test dei livelli in alto e in basso possono essere eseguit in parallelo.
+            
+            \item \textit{Sandwich Testing Rivistato.} Si testano, in parallelo, il livello al top con stub per il target, il livello nel mezzo con driver e stub per i livello al top e in basso rispettivamente, e il livello basso con driver.
+        \end{itemize}
+        
+    \subsection{System Testing}
+    
+        Unit Testing e Integration Testing focalizzano l'attenzione sulla ricerca di bug nelle componenti individuali e nelle interfacce fra componenti. Il \textbf{System Testing}, invece, assicura che il sistema completo sia conforme ai requisiti funzionali e non. Le attività per questo testing sono le seguenti.
+        
+        \begin{itemize}
+            \item \textit{Structure Testing.} Simile al White-Box Testing, ha l'obiettivo di coprire tutti i cammini del System Design.
+            
+            \item \textit{Functional Testing.} Simile al Black-Box Testing, ha l'obiettivo di testare le funzionalità del sistema, progettando i test case a partire dal RAD e incentrandosi attorno ai requisiti e alle funzioni chiave (casi d'uso).
+            
+            \item \textit{Performance Testing.} Si spinge il sistema verso i suoi limiti, con l'obiettivo di romperlo. Un esempio è lo Stress Testing.
+            
+            \item \textit{Acceptance Testing.} Ha l'obiettivo di dimostrare che il sistema è pronto per l'uso operativo. A tale scopo, la scelta dei test è fatta dal cliente.
+        \end{itemize}
+            
+    \subsection{Object-Oriented Testing}
+
+        Il testing di sistemi software object-oriented deve sempre tener conto dell'astrazione sui dati, dell'ereditarietà, del polimorfismo, del binding dinamico, delle eccezioni e della concorrenza.
+        
+        Pertanto, nel caso in cui il software sia object-oriented, l'impatto sul test è considerevole.
+        
+        \vspace{3mm}
+        
+        Il test del singolo metodo può essere fatto con tecniche tradizionali. L'infrastruttura deve settare opportunamente lo stato per poter eseguire i test ed esaminare lo stato per poter stabilire l'esito dei test (oracoli); tuttavia, dato che lo stato è generalmente privato, si usano approcci intrusivi, come l'aggiunta di metodi testdriver e tecniche di costruzione di macchine a stati finiti, dove gli stati sono l'insieme degli stati della classe e le transizioni sono le invocazioni dei metodi.
+        
+        \vspace{3mm}
+        
+        Per ciò che concerne i test di integrazione, l'approccio "Big-Bang" è generalmente poco adatto. Per quanto riguarda le strategie top-down e bottom-up, cambia il tipo di dipendenze tra moduli. E' preferibile una strategia bottom-up, cioè testare prima le classi indipendenti. In generale, le dipendenze tra le classi possono essere espresse un grafo delle dipendenze. 
+        
+        Se il grafo è aciclico, esiste un ordinamento parziale sui suoi elementi: è possibile definire un ordinamento totale topologico e privilegiare le dipendenze di specializzazione. Una volta definito l'ordine di integrazione, si aggiungono le classi incrementalmente, esercitandone le interazioni. La generazione dei casi di test può essere effettuata a partire dai diagrammi di interazione.
+        
+        \vspace{3mm}
+        
+        \textit{Nell'ambito dell'ereditarietà}, è necessario identificare le proprietà che devono essere ritestate per ogni classe figlia, al fine di verificare la compatibilità del comportamento tra metodi omonimi in una relazione classe-sottoclasse.
+        
+        \textit{Nell'ambito della genericità}, le classi parametriche devono essere istanziate per poter essere testate.
+        
+        \textit{Nell'ambito delle eccezioni}, queste ultime modificano il flusso di controllo senza la presenza di un esplicito costrutto di tipo test and branch. 
+        
+        \vspace{3mm}
+        
+        Ci sono problemi nel calcolare l'indice di copertura della parte di codice relativa alle eccezioni: una copertura ottimale solleverebbe tutte le possibili eccezioni in tutti i punti del codice in cui è possibile farlo; una copertura minima, invece, solleverebbe almeno una volta ogni eccezione.
+
+\end{document}
